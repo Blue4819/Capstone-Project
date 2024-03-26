@@ -2,10 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/userModel')
 
-router.get('/', (request, response, next) => {
-    response.json({mssg:"Success!"})
-})
-
+//create a new user (will happen during login)
 router.post('/', async (request, response) => {
     const {username, email} = request.body
     try{
@@ -15,5 +12,11 @@ router.post('/', async (request, response) => {
         response.status(400).json({error: error.message})
     }
 })
+
+//
+
+//edit user profile
+
+//delete user profile
 
 module.exports = router
