@@ -7,6 +7,7 @@ import {
     signin,
     saveInfo,
     profileInfo,
+    updateLocation
   } from "../controllers/userController.js";
 
 //create a new user (will happen during login)
@@ -19,5 +20,7 @@ router.post("/save_info", saveInfo);
 router.get("/:id", profileInfo);
 
 router.get("/:id", ownProfileInfo);
+
+router.post("/update_location", updateLocation)
 
 module.exports = router
