@@ -1,7 +1,5 @@
-import User from "../models/user.js";
+const User = require("../models/user.js");
 const auth = require('../middleware/auth');
-
-import { distanceTo } from "geolocation-utils";
 
 export const signup = async (req, res) => {
     try {
