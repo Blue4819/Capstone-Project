@@ -10,10 +10,30 @@ const UserSchema = new mongoose.Schema(
       email: {type: String,required: true,max: 50,unique: true,},
       password: {type: String,required: true,min: 8,},
       picturePath: {type: String,default: "",},
-      following: {type: Array,default: [],},
-      followers: {type: Array, default: [],},
-      followed_locations: {type: [String], default: []},
-      followed_activities: {type: [String], default: []},
+      following: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      followers: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+      followed_locations: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "location",
+        },
+      ],
+      followed_activities: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "activity",
+        },
+      ],
       location: String,
       bio: String,
       gender: String,

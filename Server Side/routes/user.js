@@ -1,26 +1,20 @@
+const userCtrl = require("../controllers/userController.js");
 const express = require('express')
+const {Schema } = mongoose;
 const router = express.Router()
 const User = require('../models/userModel')
 
-import {
-    signup,
-    signin,
-    saveInfo,
-    profileInfo,
-    updateLocation
-  } from "../controllers/userController.js";
-
 //create a new user (will happen during login)
-router.post("/signup", signup);
+router.post("/signup", userCtrl.signup);
 
-router.post("/login", signin);
+router.post("/login", userCtrl.signin);
 
-router.post("/save_info", saveInfo);
+router.post("/save_info", userCtrl.saveInfo);
 
-router.get("/:id", profileInfo);
+router.get("/:id", userCtrl.profileInfo);
 
-router.get("/:id", ownProfileInfo);
+router.get("/:id", userCtrl.ownProfileInfo);
 
-router.post("/update_location", updateLocation)
+router.post("/update_location", userCtrl.updateLocation)
 
 module.exports = router
