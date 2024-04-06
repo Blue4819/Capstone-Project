@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Inter:wght@100..900&display=swap');
+
+.wrapper {
+    width: 400px;
+    background-color:#C7D6A1;
+    color: #250101;
+    align-items:center;
+    border-radius:10px;
+    padding: 30px 40px;
+
+}
+
+.wrapper h1{
+    font-family:"Didact Gothic", sans-serif;
+    font-size: 70px;
+    text-align: center;
+}
+
+.wrapper p{
+    font-family:"Didact Gothic", sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height:50px;
+    margin: 20px 0;
+    text-align: center;
+
+}
+
+.input-box input {
+    align-self: center;
+    width: 80%;
+    height: 70%;
+    border: 2px solid rgb(255, 255, 255,.2);
+    outline: none;
+    border-radius: 10px;
+    background: #fff;
+    font-display:calc();
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder{
+    color: #fff;
+}
+
+.input-box p{
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    margin-top:10px;
+    text-align:left;
+    margin-left: 30px;
+}
+.wrapper .remember-forgot{
+    display: flex;
+    justify-content:space-between;
+    font-size: 14.5px;
+    font-family:"Didact Gothic", sans-serif;
+    margin: -1px 0px 1px;
+}
+
+.remember-forgot label input {
+    accent-color:#fff;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color:#2d2824;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover{
+    text-decoration: underline;
+}
+
+.wrapper button{
+    width: 100%;
+    height: 50px;
+    background: #E85A50;
+    border: none;
+    outline-width:none;
+    border-radius: 10px;
+    box-shadow:0 0 10px rgb(0, 0, 0, .1);
+    cursor: pointer;
+    font: size 16px;
+    color:#ffffff ;
+    font-weight: 700;
+    margin-top: 20px;
+
+}
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register-link p a{
+    font-family: "Inter", sans-serif;
+    color: #250101;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.register-link p a:hover{
+    font-family: "Inter", sans-serif;
+    text-decoration: underline;
+    font-size: 14px;
+
+}
