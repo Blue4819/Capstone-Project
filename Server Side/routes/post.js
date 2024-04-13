@@ -8,5 +8,6 @@ import{
 } from "../controllers/postController.js";
 
 //go to specific post
-router.post("/new", newPost)
+router.post("/new", newPost);
+
 router.get("/:id", seePost);
