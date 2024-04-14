@@ -1,7 +1,7 @@
 // LeftSection.js
 import React from 'react';
-import connectImage from './connect.jpg';
-import shareImage from './share.jpg';
+import connectImage from '../images/connect.jpg';
+import shareImage from '../images/share.jpg';
 
 const LeftSection = () => {
   return (
