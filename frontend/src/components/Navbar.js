@@ -1,16 +1,22 @@
 // Navbar.js
 import React from 'react';
-import logo from '../images/logo.png';
+import logoImage from '../images/logo.png';
 
 const Navbar = () => {
   return (
-    <nav style={{ backgroundColor: 'rgba(235, 223, 206, 1)' }}>
-      <div className="navbar-content">
-        <div>Holidate</div>
-        <img src={logo} alt="Logo" />
-      </div>
-    </nav>
+    <div>
+      {/* Header */}
+      <header className="bg-[#EBDFCE] py-4 px-9 flex items-center justify-between rounded-full">
+        {/* Logo */}
+        <img src={logoImage} alt="Holidate" className="h-20 rounded-l" />
+        {/* Navigation */}
+        <nav className="flex items-center text-semi-bold text-lg">
+          <a href="#" className="hover:underline">Login</a>
+        </nav>
+      </header>
+    </div>
   );
 };
 
 export default Navbar;
+
