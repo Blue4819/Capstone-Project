@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const { Schema } = mongoose;
 
 const postSchema = new Schema({
@@ -16,6 +17,4 @@ const postSchema = new Schema({
   comments: [{ type: String, default: [] }],
 }, { timestamps: true });
 
-const Post = mongoose.model('Post', postSchema);
-
-module.exports = Post;
+export default mongoose.model('Post', postSchema);

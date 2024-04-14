@@ -1,12 +1,15 @@
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import postRoutes from './routes/post.js';
+import userRoutes from './routes/user.js';
 
-const userRoutes = require('./routes/user')
-const postRoutes = require('./routes/post')
+// Load environment variables
+dotenv.config();
 
-//invoking and starting the express app
-const app = express()
+// Initialize Express app
+const app = express();
 
 //middleware
 app.use(express.json())  
