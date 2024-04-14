@@ -1,10 +1,18 @@
+// App.js
 import React from 'react';
-import HoliDatePage from './HoliDatePage'; // Assuming HoliDatePage.js is in the same directory
+import Navbar from './components/Navbar';
+import LeftSection from './components/LeftSection';
+import RightSection from './components/RightSection';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <HoliDatePage />
+      <Navbar />
+      <div className="container">
+        <LeftSection />
+        <RightSection />
+      </div>
     </div>
   );
 }
