@@ -1,6 +1,6 @@
 const userCtrl = require("../controllers/userController.js");
 const express = require('express')
-const {Schema } = mongoose;
+const {Schema} = mongoose;
 const router = express.Router()
 const User = require('../models/userModel')
 
