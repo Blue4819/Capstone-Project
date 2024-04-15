@@ -1,25 +1,29 @@
 import User from "../models/userModel.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import auth from "../middleware/auth.js";
 
 export const signup = async (req, res) => {
   try {
-    const saltRounds = 10;
+    // const saltRounds = 10;
     const exists = await User.find({ email: req.body.email });
     if (exists[0]) res.json("");
-    else
-      bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-        if (err) console.log(err);
+    else {
+      // bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+        if (/*err*/ false) console.log(err);
         else {
           const user = new User({
             email: req.body.email,
-            hash,
-            coords: req.body.coords,
+            password: req.body.password,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username
+            // hash,
           });
           const saved = await user.save();
           res.status(200).json(saved);
         }
-      });
+      // });
+    }
   } catch (error) {
     console.log(error);
     res.json("");
@@ -28,15 +32,16 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   try {
+    console.log("Sign In request received")
     const exists = await User.find({ email: req.body.email });
     if (!exists[0]) res.json("");
     else {
       const user = await User.findOne({ email: req.body.email });
-      bcrypt.compare(req.body.password, user.hash, (err, result) => {
-        if (err) console.log(err);
-        else if (result) res.status(200).json(user);
-        else res.json("");
-      });
+      if (user.password === req.body.password) {
+        res.status(200).json(user);
+      } else {
+        res.json("");
+      }
     }
   } catch (error) {
     console.log(error);
