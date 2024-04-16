@@ -24,7 +24,7 @@ export default function Form({
             <p className='font-medium text-lg text-black-500 mt-4'>Enter your email and password to access your account</p>
             <div className='mt-8'>
                 <div>
-                    <label className='text-lg font-medium'>Email/Username</label>
+                    <label className='text-lg font-medium'>Email</label>
                     <input
                         className='w-full border-2 border-gray-100 rounded-xl p-3 mt-2 bg-white'
                         placeholder=''
@@ -70,7 +70,7 @@ export default function Form({
                 </div>
                 <p className='mt-6 text-base'>
                     Don't have an account?{' '}
-                    <button className='font-medium text-[#250101] hover:underline'>Sign up</button>
+                    <button href ="" className='font-medium text-[#250101] hover:underline'>Sign up</button>
                 </p>
             </div>
         </form>
