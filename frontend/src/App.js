@@ -1,7 +1,4 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import LeftSection from './components/LeftSection';
-import RightSection from './components/RightSection';
 import './App.css';
 
 function App() { 
