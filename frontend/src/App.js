@@ -10,8 +10,9 @@ function App() {
     <BrowserRouter>
     <div className="pages">
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<ProtectedRoute><LoginPage /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>
     </BrowserRouter>
@@ -21,3 +22,24 @@ function App() {
 
 export default App;
 
+export function ProtectedRoute(props) {
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  if(auth){
+    response.error("Already logged in")
+    window.location.href = "/dashboard"
+  }
+  else{
+    return props.children;
+  }
+}
+
+export function PrivateRoute(props){
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  if(!auth){
+    response.error("Not logged in")
+    window.location.href = "/login"
+  }
+  else{
+    return props.children;
+  }
+}

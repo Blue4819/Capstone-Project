@@ -11,7 +11,9 @@ const SignIn = (props) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/user/login', { email, password});
+      localStorage.setItem("auth", JSON.stringify({token: data.token, isGoogle: data.isGoogle}))
+      
+      const response = await axios.post('/user/login', {email, password});
       console.log('User sign-in successful:', response);
       navigate('/dashboard');
     } catch(error) {
