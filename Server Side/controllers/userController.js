@@ -34,13 +34,13 @@ export const signin = async (req, res) => {
   try {
     console.log("Sign In request received")
     const exists = await User.find({ email: req.body.email });
-    if (!exists[0]) res.json("");
+    if (!exists[0]) res.status(401).json({ error: 'No account exists' });
     else {
       const user = await User.findOne({ email: req.body.email });
       if (user.password === req.body.password) {
         res.status(200).json(user);
       } else {
-        res.json("");
+        res.status(401).json({ error: 'Invalid email or password' });
       }
     }
   } catch (error) {

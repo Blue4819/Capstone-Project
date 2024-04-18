@@ -9,14 +9,21 @@ const SignIn = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {      
+  
+    try {
       const response = await axios.post('/user/login', {email, password});
-      const {token, isGoogle} = response;
-
-      localStorage.setItem("auth", JSON.stringify({token, isGoogle}))
-      console.log('User sign-in successful:', response);
-      navigate('/dashboard');
+  
+      if (response.data.error) {
+        // If the response contains an error, log the error message
+        console.error('User sign-in error:', response.data.error);
+      } else {
+        // If the response does not contain an error, extract the token and isGoogle property
+        const {token, isGoogle} = response.data;
+  
+        localStorage.setItem("auth", JSON.stringify({token, isGoogle}))
+        console.log('User sign-in successful:', response);
+        navigate('/dashboard');
+      }
     } catch(error) {
       console.error('User sign-in error:', error);
     }
