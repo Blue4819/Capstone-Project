@@ -1,3 +1,7 @@
+import Navbar from './Navbar';
+import LeftSection from './LeftSection';
+import RightSection from './RightSection';
+
 const Signup = () => {
     return (
         <div className="App">
@@ -7,7 +11,6 @@ const Signup = () => {
             <RightSection />
           </div>
         </div>
-  
     );
   }
   

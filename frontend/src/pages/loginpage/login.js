@@ -15,7 +15,7 @@ const LoginPage = () => {
         <img src={logoImage} alt="Holidate" className="h-20 rounded-xl" />
         {/* Navigation */}
         <nav className="flex items-center text-semi-bold text-lg">
-          <a href="#" className="hover:underline">Sign Up!</a>
+          <a href="/signup" className="hover:underline">Sign Up!</a>
         </nav>
       </header>
       {/* Main Content */}

@@ -69,8 +69,8 @@ export default function Form({
                     </button>
                 </div>
                 <p className='mt-6 text-base'>
-                    Don't have an account?{' '}
-                    <button href ="" className='font-medium text-[#250101] hover:underline'>Sign up</button>
+                    Don't have an account?
+                    <button href ="/signup" className='font-medium text-[#250101] hover:underline'>Sign up</button>
                 </p>
             </div>
         </form>

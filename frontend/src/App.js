@@ -1,6 +1,7 @@
 import LoginPage from "./pages/loginpage/login";
 import * as React from 'react';
 import Dashboard from "./pages/dashboard/dashboard";
+import Signup from "./pages/signup/signup";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -11,6 +12,7 @@ function App() {
     <div className="pages">
       <Routes>
         <Route path="/login" element={<ProtectedRoute><LoginPage /></ProtectedRoute>} />
+        <Route path="/signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
