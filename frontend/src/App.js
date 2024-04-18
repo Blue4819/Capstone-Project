@@ -27,7 +27,6 @@ export default App;
 export function ProtectedRoute(props) {
   const auth = JSON.parse(localStorage.getItem('auth'))
   if(auth){
-    response.error("Already logged in")
     window.location.href = "/dashboard"
   }
   else{
@@ -38,7 +37,6 @@ export function ProtectedRoute(props) {
 export function PrivateRoute(props){
   const auth = JSON.parse(localStorage.getItem('auth'))
   if(!auth){
-    response.error("Not logged in")
     window.location.href = "/login"
   }
   else{

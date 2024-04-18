@@ -11,7 +11,7 @@ const Navbar = () => {
         <img src={logoImage} alt="Holidate" className="h-20 rounded-l" />
         {/* Navigation */}
         <nav className="flex items-center text-semi-bold text-lg">
-          <a href="#" className="hover:underline">Login</a>
+          <a href="/login" className="hover:underline">Login</a>
         </nav>
       </header>
     </div>

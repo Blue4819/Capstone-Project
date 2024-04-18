@@ -10,10 +10,11 @@ const SignIn = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      localStorage.setItem("auth", JSON.stringify({token: data.token, isGoogle: data.isGoogle}))
-      
+    try {      
       const response = await axios.post('/user/login', {email, password});
+      const {token, isGoogle} = response;
+
+      localStorage.setItem("auth", JSON.stringify({token, isGoogle}))
       console.log('User sign-in successful:', response);
       navigate('/dashboard');
     } catch(error) {
