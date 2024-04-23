@@ -13,10 +13,10 @@ const UserSchema = new Schema({
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   followed_locations: [{ type: Schema.Types.ObjectId, ref: "Location" }],
   followed_activities: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
-  location: String,
-  bio: String,
-  gender: String,
-  age: Number,
+  location: { type: String, default: "" },
+  bio: { type: String, default: "" },
+  gender: { type: String, default: "" },
+  dob: { type: Date},
 }, { timestamps: true });
 
 export default mongoose.model('User', UserSchema);

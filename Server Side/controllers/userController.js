@@ -6,7 +6,7 @@ export const signup = async (req, res) => {
   try {
     // const saltRounds = 10;
     const exists = await User.find({ email: req.body.email });
-    if (exists[0]) res.json("");
+    if (exists[0]) res.status(401).json({ error: 'User already exists' });
     else {
       // bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
         if (/*err*/ false) console.log(err);
@@ -62,7 +62,7 @@ export const saveInfo = async (req, res) => {
           location: req.body.info.location,
           bio: req.body.info.bio,
           gender: req.body.info.gender,
-          age: req.body.info.age,
+          dob: req.body.info.dob,
         },
       }
     );
@@ -105,6 +105,17 @@ export const updateLocation = async (req, res) => {
     const { id } = req.params;
     const { location } = req.body;
     await User.findByIdAndUpdate(id, { location });
+    res.status(200).json({ message: "Location updated successfully." });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
+export const updateDOB = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { dob } = req.dob;
+    await User.findByIdAndUpdate(id, { dob });
     res.status(200).json({ message: "Location updated successfully." });
   } catch (error) {
     res.json({ error });

@@ -1,5 +1,5 @@
 import express from 'express';
-import { signup, signin, saveInfo, profileInfo, ownProfileInfo, updateLocation } from '../controllers/userController.js';
+import { signup, signin, saveInfo, profileInfo, ownProfileInfo, updateLocation, updateDOB } from '../controllers/userController.js';
 import User from '../models/userModel.js';
 
 const router = express.Router();
@@ -16,5 +16,8 @@ router.get('/:id', profileInfo);
 router.get('/own/:id', ownProfileInfo);
 
 router.post('/update_location', updateLocation);
+
+router.post('/updatedob', updateDOB);
+
 
 export default router;
