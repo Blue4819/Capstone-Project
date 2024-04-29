@@ -20,10 +20,11 @@ export default function Form({
     };
 
     const handleGoogleLoginSuccess = (response) => {
-        console.log(response);
-        setEmail(response.profile.email);
-        axios.post("/api/user/google/callback", { email }).then((response) => {
-            // Handle the response from the server
+        console.log("Google login success:", response);
+        const cred = response.credential;
+        console.log("Credential:", cred);
+        axios.post("/user/google/callback", { cred }).then((res) => {
+            console.log("Logged in") // Handle the response from the server
           });
     };
 

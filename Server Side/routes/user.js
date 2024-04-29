@@ -9,7 +9,7 @@ router.post('/signup', signup);
 router.post('/login', signin);
 
 // handle Google authentication callback
-router.get('/google/callback', googleSignIn);
+router.post('/google/callback', googleSignIn);
 
 router.post('/save_info', saveInfo);
 

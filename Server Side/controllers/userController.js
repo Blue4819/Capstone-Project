@@ -1,6 +1,12 @@
 import User from "../models/userModel.js";
+import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
+import {jwtDecode} from "jwt-decode";
 // import bcrypt from "bcrypt";
 import auth from "../middleware/auth.js";
+import axios from 'axios';
+
+config();
 
 export const signup = async (req, res) => {
   try {
@@ -51,34 +57,31 @@ export const signin = async (req, res) => {
 
 export const googleSignIn = async (req, res) => {
   try {
+    const token = req.body.cred;
+    const decoded = jwtDecode(token);
+    console.log(decoded)
     console.log("Google signin requested")
-    const { token } = req.query;
-
     // Verify the authentication token with Google
-    const response = await axios.post(
-      "https://oauth2.googleapis.com/tokeninfo",
-      { id_token: token },
-      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
-    );
+    const response = await axios.post("https://oauth2.googleapis.com/tokeninfo",{ id_token: token },);
 
     // Extract the user's email address from the response
     const { email } = response.data;
 
     // Check if the user exists in the database
-    const exists = await User.findOne({ email });
+    //const exists = await User.findOne({ email });
 
-    if (exists) {
+    //if (exists) {
       // Authenticate the user and return a response with the user's information
-      const token = jwt.sign(
-        { userId: exists._id },
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" }
-      );
-      res.status(200).json({ token });
-    } else {
+      //const token = jwt.sign(
+        //{ userId: exists._id },
+        //process.env.JWT_SECRET,
+        //{ expiresIn: "1h" }
+      //);
+      //res.status(200).json({ token });
+    //} else {
       // Redirect the user to the signup page
-      res.redirect("/signup");
-    }
+      //res.redirect("/signup");
+    //}
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
