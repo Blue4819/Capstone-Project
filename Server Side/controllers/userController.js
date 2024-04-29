@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   try {
-    console.log("Sign In request received")
+    console.log("Sign in request received")
     const exists = await User.find({ email: req.body.email });
     if (!exists[0]) res.status(401).json({ error: 'No account exists' });
     else {
@@ -46,6 +46,42 @@ export const signin = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.json("");
+  }
+};
+
+export const googleSignIn = async (req, res) => {
+  try {
+    console.log("Google signin requested")
+    const { token } = req.query;
+
+    // Verify the authentication token with Google
+    const response = await axios.post(
+      "https://oauth2.googleapis.com/tokeninfo",
+      { id_token: token },
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+    );
+
+    // Extract the user's email address from the response
+    const { email } = response.data;
+
+    // Check if the user exists in the database
+    const exists = await User.findOne({ email });
+
+    if (exists) {
+      // Authenticate the user and return a response with the user's information
+      const token = jwt.sign(
+        { userId: exists._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({ token });
+    } else {
+      // Redirect the user to the signup page
+      res.redirect("/signup");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SignIn from './signin.js';
 import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 export default function Form({
     setUser,
@@ -16,6 +17,18 @@ export default function Form({
         } else if (e.target.name === 'password') {
             setPassword(e.target.value);
         }
+    };
+
+    const handleGoogleLoginSuccess = (response) => {
+        console.log(response);
+        setEmail(response.profile.email);
+        axios.post("/api/user/google/callback", { email }).then((response) => {
+            // Handle the response from the server
+          });
+    };
+
+    const handleGoogleLoginError = () => {
+        console.log('Login Failed');
     };
 
     return (
@@ -57,12 +70,10 @@ export default function Form({
                 <div className='mt-8 flex flex-col gap-y-4'>
                     <SignIn email={email} password={password} />
                     <GoogleLogin
-                        onSuccess={credentialResponse => {
-                            console.log(credentialResponse);
-                        }}
-                        onError={() => {
-                            console.log('Login Failed');
-                        }}
+                        buttonText="Sign in with Google"
+                        onSuccess={handleGoogleLoginSuccess}
+                        onFailure={handleGoogleLoginError}
+                        cookiePolicy={'single_host_origin'}
                     />
                 </div>
                 <p className='mt-6 text-base'>
