@@ -6,7 +6,7 @@ export const signup = async (req, res) => {
   try {
     // const saltRounds = 10;
     const exists = await User.find({ email: req.body.email });
-    if (exists[0]) res.json("");
+    if (exists[0]) res.status(401).json({ error: 'User already exists' });
     else {
       // bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
         if (/*err*/ false) console.log(err);
@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   try {
-    console.log("Sign In request received")
+    console.log("Sign in request received")
     const exists = await User.find({ email: req.body.email });
     if (!exists[0]) res.status(401).json({ error: 'No account exists' });
     else {
@@ -49,6 +49,42 @@ export const signin = async (req, res) => {
   }
 };
 
+export const googleSignIn = async (req, res) => {
+  try {
+    console.log("Google signin requested")
+    const { token } = req.query;
+
+    // Verify the authentication token with Google
+    const response = await axios.post(
+      "https://oauth2.googleapis.com/tokeninfo",
+      { id_token: token },
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+    );
+
+    // Extract the user's email address from the response
+    const { email } = response.data;
+
+    // Check if the user exists in the database
+    const exists = await User.findOne({ email });
+
+    if (exists) {
+      // Authenticate the user and return a response with the user's information
+      const token = jwt.sign(
+        { userId: exists._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({ token });
+    } else {
+      // Redirect the user to the signup page
+      res.redirect("/signup");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const saveInfo = async (req, res) => {
   try {
     const saved = await User.updateOne(
@@ -62,7 +98,7 @@ export const saveInfo = async (req, res) => {
           location: req.body.info.location,
           bio: req.body.info.bio,
           gender: req.body.info.gender,
-          age: req.body.info.age,
+          dob: req.body.info.dob,
         },
       }
     );
@@ -105,6 +141,17 @@ export const updateLocation = async (req, res) => {
     const { id } = req.params;
     const { location } = req.body;
     await User.findByIdAndUpdate(id, { location });
+    res.status(200).json({ message: "Location updated successfully." });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
+export const updateDOB = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { dob } = req.dob;
+    await User.findByIdAndUpdate(id, { dob });
     res.status(200).json({ message: "Location updated successfully." });
   } catch (error) {
     res.json({ error });
