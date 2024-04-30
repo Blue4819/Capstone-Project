@@ -3,18 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const relatedOptions = document.getElementById('relatedOptions');
     relatedOptions.style.display = 'none';
 
-    function handleInterestButtonClick(button) {
-        if (selectedButtons.includes(button)) {
-            // If button is already selected, remove it from the array and remove 'selected' class
-            const index = selectedButtons.indexOf(button);
-            selectedButtons.splice(index, 1);
-            button.classList.remove('selected');
-        } else {
-            // If button is not selected, add it to the array and add 'selected' class
-            selectedButtons.push(button);
-            button.classList.add('selected');
-        }
-    }
+    
 
     // Event listener for interest buttons
     const adventureSportsBtn = document.getElementById('adventureSportsBtn');
