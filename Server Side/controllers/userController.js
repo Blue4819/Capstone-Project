@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import {jwtDecode} from "jwt-decode";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import auth from "../middleware/auth.js";
 import axios from 'axios';
 
@@ -10,25 +10,24 @@ config();
 
 export const signup = async (req, res) => {
   try {
-    // const saltRounds = 10;
+    const saltRounds = 10;
     const exists = await User.find({ email: req.body.email });
     if (exists[0]) res.status(401).json({ error: 'User already exists' });
     else {
-      // bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-        if (/*err*/ false) console.log(err);
+      bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+        if (err) console.log(err);
         else {
           const user = new User({
             email: req.body.email,
-            password: req.body.password,
+            password: hash,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             username: req.body.username
-            // hash,
           });
           const saved = await user.save();
           res.status(200).json(saved);
         }
-      // });
+      });
     }
   } catch (error) {
     console.log(error);
@@ -43,11 +42,13 @@ export const signin = async (req, res) => {
     if (!exists[0]) res.status(401).json({ error: 'No account exists' });
     else {
       const user = await User.findOne({ email: req.body.email });
-      if (user.password === req.body.password) {
-        res.status(200).json(user);
-      } else {
-        res.status(401).json({ error: 'Invalid email or password' });
-      }
+      bcrypt.compare(req.body.password, user.password, (err, result) => {
+        if (result) {
+          res.status(200).json(user);
+        } else {
+          res.status(401).json({ error: 'Invalid email or password' });
+        }
+      });
     }
   } catch (error) {
     console.log(error);
@@ -59,29 +60,27 @@ export const googleSignIn = async (req, res) => {
   try {
     const token = req.body.cred;
     const decoded = jwtDecode(token);
-    console.log(decoded)
     console.log("Google signin requested")
-    // Verify the authentication token with Google
-    const response = await axios.post("https://oauth2.googleapis.com/tokeninfo",{ id_token: token },);
 
     // Extract the user's email address from the response
-    const { email } = response.data;
+    const email = decoded.email;
+    console.log(email)
 
     // Check if the user exists in the database
-    //const exists = await User.findOne({ email });
+    const exists = await User.findOne({ email });
 
-    //if (exists) {
+    if (exists) {
       // Authenticate the user and return a response with the user's information
-      //const token = jwt.sign(
-        //{ userId: exists._id },
-        //process.env.JWT_SECRET,
-        //{ expiresIn: "1h" }
-      //);
-      //res.status(200).json({ token });
-    //} else {
-      // Redirect the user to the signup page
-      //res.redirect("/signup");
-    //}
+      const token = jwt.sign(
+        { userId: exists._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({exists, token });
+    } else {
+       //Redirect the user to the signup page
+       res.status(200).json({ user:null });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });

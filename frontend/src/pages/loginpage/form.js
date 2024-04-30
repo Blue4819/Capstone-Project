@@ -23,9 +23,18 @@ export default function Form({
         console.log("Google login success:", response);
         const cred = response.credential;
         console.log("Credential:", cred);
-        axios.post("/user/google/callback", { cred }).then((res) => {
-            console.log("Logged in") // Handle the response from the server
-          });
+        axios.post("/user/google/callback", { cred })
+        .then((res) => {
+            if(res.data.user) {
+                // If the user exists, store the token in the local storage and redirect to the dashboard
+                localStorage.setItem('token', res.data.token);
+                window.location.href = '/dashboard';
+            } else {
+                // If the user does not exist, redirect to the signup page
+                window.location.href = '/signup';
+            }
+        })
+        .catch(error => console.log(error));
     };
 
     const handleGoogleLoginError = () => {
