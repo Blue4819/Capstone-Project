@@ -1,0 +1,210 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3d9b6; /* Sandy color */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url('travelling.jpg');
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+form {
+    
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(255, 99, 71, 0.6); /* Light red background */
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    transition: transform 0.3s ease;
+}
+
+form:hover {
+    transform: translateY(-5px);
+}
+
+form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.profile-pic-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
+.upload-btn {
+    display: block;
+    width: 150px;
+    padding: 10px;
+    background-color: #f3d9b6; /* Sandy color */
+    color: #000; /* Black text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: #cda670; /* Darker sandy color */
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #fff; /* White text */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+#gender {
+    width: calc(100% - 40px);
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+form input[type="file"] {
+    display: none;
+}
+
+.interests {
+    color: #fff; /* White text */
+    margin-bottom: 30px;
+}
+
+.interestBtn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 15px 30px;
+    background-color: #f3d9b6; /* Sandy color */
+    color: #000; /* Black text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.interestBtn:hover {
+    background-color: #cda670; /* Darker sandy color */
+}
+
+.selected {
+    background-color: #cda670; /* Darker sandy color */
+}
+
+#locationsContainer {
+    margin-bottom: 30px;
+}
+
+.locationInput {
+    width: calc(100% - 40px);
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+#addLocationBtn {
+    display: block;
+    width: 150px;
+    padding: 10px;
+    background-color: #f3d9b6; /* Sandy color */
+    color: #000; /* Black text */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#addLocationBtn:hover {
+    background-color: #cda670; /* Darker sandy color */
+}
+
+.upload-btn[type="submit"] {
+    background-color: #4CAF50; /* Green color */
+    color: white;
+}
+
+.upload-btn[type="submit"]:hover {
+    background-color: #45a049; /* Darker green color on hover */
+}
+/* Add styling for the location buttons */
+.locationBtn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.locationBtn:hover {
+    background-color: sandybrown;
+}
+
+/* Common button styling */
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Sand-colored buttons */
+.interest-btn,
+.location-btn {
+    background-color: sandybrown;
+    color: black;
+    border: none;
+}
+
+/* Hover effects */
+.button:hover {
+    background-color: #d1a165;
+}
+.container {
+    display: flex;
+}
+
