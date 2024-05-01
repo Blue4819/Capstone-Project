@@ -87,6 +87,46 @@ export const googleSignIn = async (req, res) => {
   }
 };
 
+export const googleSignup = async (req, res) => {
+  try {
+    const token = req.body.cred;
+    const decoded = jwtDecode(token);
+    console.log("Google signup requested")
+
+    // Extract the user's email address from the response
+    const email = decoded.email;
+    console.log(email)
+
+    // Check if the user exists in the database
+    const exists = await User.findOne({ email });
+
+    if (!exists) {
+      // If the user does not exist, create a new user
+      const saltRounds = 10;
+      bcrypt.hash(decoded.sub, saltRounds, async (err, hash) => {
+        if (err) console.log(err);
+        else {
+          const user = new User({
+            email: email,
+            password: hash,
+            firstName: decoded.given_name,
+            lastName: decoded.family_name,
+            username: decoded.name
+          });
+          const saved = await user.save();
+          res.status(200).json({saved, message:"User created"});
+        }
+      });
+    } else {
+      // If the user already exists, redirect to the dashboard
+      res.status(200).json({exists, message: "User already exists" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const saveInfo = async (req, res) => {
   try {
     const saved = await User.updateOne(

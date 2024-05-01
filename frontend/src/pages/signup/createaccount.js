@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { GoogleLogin } from '@react-oauth/google';
+
 
 const CreateAccount = (props) => {
   const email = props.email;
@@ -13,6 +15,26 @@ const CreateAccount = (props) => {
   const confirmPassword = props.confirmPassword;
   const navigate = useNavigate();
 
+  const handleGoogleSignupSuccess = (response) => {
+    console.log("Google signup success:", response);
+    const cred = response.credential;
+    console.log("Credential:", cred);
+    axios.post("/user/google/callback/signup", { cred })
+    .then((res) => {
+        if(res) {
+            // If the user exists, store the token in the local storage and redirect to the dashboard
+            console.log(res.data)
+            localStorage.setItem('token', res.data.token);
+            window.location.href = '/dashboard';
+        } 
+    })
+    .catch(error => console.log(error));
+  };
+
+  const handleGoogleSignupError = () => {
+    console.log('Signup Failed');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,7 +45,7 @@ const CreateAccount = (props) => {
     }
 
     try {
-      const response = await axios.post('/user/signup', {firstName, lastName, username, email, password});
+      const response = await axios.post('/user/signup', {firstName, lastName, username, email, password, dob});
 
       if (response.data.error) {
         // If the response contains an error, log the error message
@@ -43,9 +65,17 @@ const CreateAccount = (props) => {
   };
 
   return (
-    <button onClick={handleSubmit} type='submit' className='rounded-full py-4 px-20 bg-[#E85A50] text-white font-bold hover:bg-[#C7D6A1]'>
-      Create Account
-    </button>
+    <div>
+      <button onClick={handleSubmit} type='submit' className='rounded-full py-4 px-20 bg-[#E85A50] text-white font-bold hover:bg-[#C7D6A1]'>
+        Create Account
+      </button>
+      <GoogleLogin
+      buttonText="Sign up with Google"
+        onSuccess={handleGoogleSignupSuccess}
+        onFailure={handleGoogleSignupError}
+        cookiePolicy={'single_host_origin'}
+        />    
+    </div>
   );
 };
 
