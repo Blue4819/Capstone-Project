@@ -3,6 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const relatedOptions = document.getElementById('relatedOptions');
     relatedOptions.style.display = 'none';
 
+    // Event listener for image upload
+    const profilePicInput = document.getElementById('profilePic');
+    const profilePicBase64Input = document.getElementById('profilePicBase64');
+
+    profilePicInput.addEventListener('change', () => {
+        const file = profilePicInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                const base64String = reader.result.split(',')[1];
+                profilePicBase64Input.value = base64String;
+                document.getElementById('profilePicPreview').src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
     
 
     // Event listener for interest buttons
