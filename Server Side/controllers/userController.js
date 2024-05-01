@@ -7,16 +7,17 @@ import auth from "../middleware/auth.js";
 import axios from 'axios';
 
 config();
-
 export const signup = async (req, res) => {
   try {
     const saltRounds = 10;
     const exists = await User.find({ email: req.body.email });
-    if (exists[0]) res.status(401).json({ error: 'User already exists' });
+    if (exists.length > 0) res.status(401).json({ error: 'User already exists' });
     else {
-      bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-        if (err) console.log(err);
-        else {
+      return bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: 'Internal server error' });
+        } else {
           const user = new User({
             email: req.body.email,
             password: hash,
@@ -25,13 +26,22 @@ export const signup = async (req, res) => {
             username: req.body.username
           });
           const saved = await user.save();
-          res.status(200).json(saved);
+          if (saved) {
+            const token = saved.sign(
+              { userId: user._id },
+              process.env.JWT_SECRET,
+              { expiresIn: "1h" }
+            );
+            res.status(200).json({user:saved, token});
+          } else {
+            res.status(500).json({ error: 'Internal server error' });
+          }
         }
       });
     }
   } catch (error) {
     console.log(error);
-    res.json("");
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -44,7 +54,12 @@ export const signin = async (req, res) => {
       const user = await User.findOne({ email: req.body.email });
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (result) {
-          res.status(200).json(user);
+          const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+          );
+          res.status(200).json({user:user, token});
         } else {
           res.status(401).json({ error: 'Invalid email or password' });
         }
@@ -76,7 +91,7 @@ export const googleSignIn = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
-      res.status(200).json({exists, token });
+      res.status(200).json({user:exists, token });
     } else {
        //Redirect the user to the signup page
        res.status(200).json({ user:null });
@@ -113,13 +128,24 @@ export const googleSignup = async (req, res) => {
             lastName: decoded.family_name,
             username: decoded.name
           });
+          const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+          );
           const saved = await user.save();
-          res.status(200).json({saved, message:"User created"});
+          res.status(200).json({user:saved, token});
         }
       });
     } else {
       // If the user already exists, redirect to the dashboard
-      res.status(200).json({exists, message: "User already exists" });
+      const token = jwt.sign(
+        { userId: exists._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      console.log(token)
+      res.status(200).json({user:exists, token:token});
     }
   } catch (error) {
     console.log(error);

@@ -2,8 +2,9 @@ import LoginPage from "./pages/loginpage/login";
 import * as React from 'react';
 import Dashboard from "./pages/dashboard/dashboard";
 import Signup from "./pages/signup/signup";
+import EditProfile from "./pages/profile/editprofile.js"
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() { 
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<ProtectedRoute><LoginPage /></ProtectedRoute>} />
         <Route path="/signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/editprofile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>
@@ -25,21 +27,21 @@ function App() {
 export default App;
 
 export function ProtectedRoute(props) {
-  const auth = JSON.parse(localStorage.getItem('auth'))
-  if(auth){
-    window.location.href = "/dashboard"
-  }
-  else{
+  const auth = JSON.parse(localStorage.getItem('auth'));
+
+  if (auth) {
+    return <Navigate to="/" replace />;
+  } else {
     return props.children;
   }
 }
 
-export function PrivateRoute(props){
-  const auth = JSON.parse(localStorage.getItem('auth'))
-  if(!auth){
-    window.location.href = "/login"
-  }
-  else{
+export function PrivateRoute(props) {
+  const auth = JSON.parse(localStorage.getItem('auth'));
+
+  if (!auth) {
+    return <Navigate to="/login" replace />;
+  } else {
     return props.children;
   }
 }

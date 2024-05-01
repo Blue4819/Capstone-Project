@@ -19,16 +19,12 @@ const CreateAccount = (props) => {
     console.log("Google signup success:", response);
     const cred = response.credential;
     console.log("Credential:", cred);
-    axios.post("/user/google/callback/signup", { cred })
-    .then((res) => {
-        if(res) {
-            // If the user exists, store the token in the local storage and redirect to the dashboard
-            console.log(res.data)
-            localStorage.setItem('token', res.data.token);
-            window.location.href = '/dashboard';
-        } 
-    })
-    .catch(error => console.log(error));
+    const res = axios.post("/user/google/callback/signup", { cred })
+    if(res) {
+      const token = res.data;
+      localStorage.setItem("auth", JSON.stringify({ token, isGoogle: true }));
+      navigate('/dashboard');
+    }       
   };
 
   const handleGoogleSignupError = () => {
@@ -52,10 +48,10 @@ const CreateAccount = (props) => {
         console.error('User sign-in error:', response.data.error);
       } else {
         // If the response does not contain an error, extract the token and isGoogle property
-        const {token, isGoogle} = response.data;
+        const token = response.data;
         axios.post('/user/update_location', {location})
 
-        localStorage.setItem("auth", JSON.stringify({token, isGoogle}))
+        localStorage.setItem("auth", JSON.stringify({token, isGoogle:false}))
         console.log('User sign-up successful:', response);
         navigate('/dashboard');
       }

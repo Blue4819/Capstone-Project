@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SignIn from './signin.js';
+import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
@@ -10,6 +11,7 @@ export default function Form({
 }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         if (e.target.name === 'email') {
@@ -25,13 +27,14 @@ export default function Form({
         console.log("Credential:", cred);
         axios.post("/user/google/callback", { cred })
         .then((res) => {
-            if(res.data.user) {
+            if(res) {
                 // If the user exists, store the token in the local storage and redirect to the dashboard
-                localStorage.setItem('token', res.data.token);
-                window.location.href = '/dashboard';
+                const token = res.data;
+                localStorage.setItem("auth", JSON.stringify({ token, isGoogle: true }));
+                navigate('/dashboard');
             } else {
                 // If the user does not exist, redirect to the signup page
-                window.location.href = '/signup';
+                navigate('/signup');
             }
         })
         .catch(error => console.log(error));

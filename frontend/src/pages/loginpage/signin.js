@@ -18,9 +18,9 @@ const SignIn = (props) => {
         console.error('User sign-in error:', response.data.error);
       } else {
         // If the response does not contain an error, extract the token and isGoogle property
-        const {token, isGoogle} = response.data;
+        const token = response.data;
   
-        localStorage.setItem("auth", JSON.stringify({token, isGoogle}))
+        localStorage.setItem("auth", JSON.stringify({token, isGoogle:false}))
         console.log('User sign-in successful:', response);
         navigate('/dashboard');
       }
