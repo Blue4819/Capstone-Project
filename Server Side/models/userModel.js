@@ -14,6 +14,7 @@ const UserSchema = new Schema({
   followed_locations: [{ type: Schema.Types.ObjectId, ref: "Location" }],
   followed_activities: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
   location: { type: String, default: "" },
+  age: { type: Number, default: 0 },
   bio: { type: String, default: "" },
   gender: { type: String, default: "" },
   dob: { type: Date},

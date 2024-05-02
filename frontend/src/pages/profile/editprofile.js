@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import './profile.css';
+import './script.js';
 import {jwtDecode} from "jwt-decode";
 
 const EditProfile = () => {
-  const [profilePic, setProfilePic] = useState(null);
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [interests, setInterests] = useState([]);
-  const [locations, setLocations] = useState([]);
-
   const decoded = JSON.parse(localStorage.getItem('auth'));
   console.log(decoded)
-  console.log(decoded.token.exists)
+  console.log(decoded.token.user)
+
+  const [profilePic, setProfilePic] = useState(decoded.token.user.profilePic || null);
+  const [name, setName] = useState(decoded.token.user.username || '');
+  const [age, setAge] = useState(decoded.token.user.age || '');
+  const [gender, setGender] = useState(decoded.token.user.gender || '');
+  const [interests, setInterests] = useState(decoded.token.user.interests || []);
+  const [locations, setLocations] = useState(decoded.token.user.locations || []);
 
   const handleInterestClick = (e) => {
     const interest = e.target.textContent;
-    if (!interests.includes(interest)) {
+    if (interests.includes(interest)) {
+      setInterests(interests.filter(item => item !== interest));
+    } else {
       setInterests([...interests, interest]);
     }
   };
@@ -41,7 +45,7 @@ const EditProfile = () => {
         <div className="profile-pic-container">
           <img id="profilePicPreview" className="profile-pic" src={profilePic || '#'} alt="Profile Picture Preview" />
           <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
-          <input type="file" id="profilePic" name="profilePic" accept="image/*" onChange={(e) => setProfilePic(e.target.files[0])} required />
+          <input type="file" id="profilePic" name="profilePic" accept="image/*" onChange={(e) => setProfilePic(e.target.files[0])} />
         </div>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -55,7 +59,7 @@ const EditProfile = () => {
         </select>
         <div className="interests">
           <label>Interests:</label>
-          <button className="interestBtn" id="adventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
+          <button className="interestBtn" id="ad</div>ventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
           <button className="interestBtn" id="culturalExplorationBtn" onClick={handleInterestClick}>Cultural Exploration</button>
           <button className="interestBtn" id="beachActivitiesBtn" onClick={handleInterestClick}>Beach Activities</button>
           <button className="interestBtn" id="mountainClimbingBtn" onClick={handleInterestClick}>Mountain Climbing</button>
@@ -82,7 +86,7 @@ const EditProfile = () => {
           ))}
         </div>
         <div className="locations">
-          <label htmlFor="locationInput">Visited Places in India:</label>
+          <label htmlFor="locationInput">Visited Places:</label>
           <div id="locationsContainer">
             <input type="text" id="locationInput" placeholder="Enter a location" />
             <button type="button" id="addLocationBtn" className="upload-btn" onClick={handleAddLocation}>Add Location</button>

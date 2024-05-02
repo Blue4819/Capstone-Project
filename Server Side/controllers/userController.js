@@ -7,6 +7,7 @@ import auth from "../middleware/auth.js";
 import axios from 'axios';
 
 config();
+
 export const signup = async (req, res) => {
   try {
     const saltRounds = 10;
@@ -25,6 +26,12 @@ export const signup = async (req, res) => {
             lastName: req.body.lastName,
             username: req.body.username
           });
+          
+          const dob = new Date(req.body.dob);
+          const birthYear = dob.getFullYear();
+          const currentYear = new Date().getFullYear();
+          const age = currentYear - birthYear - (new Date().getMonth() > dob.getMonth() ? 0 : 1) - (new Date().getDate() > dob.getDate() ? 0 : 1);
+          user.age = age;
           const saved = await user.save();
           if (saved) {
             const token = saved.sign(
@@ -128,6 +135,7 @@ export const googleSignup = async (req, res) => {
             lastName: decoded.family_name,
             username: decoded.name
           });
+        
           const token = jwt.sign(
             { userId: user._id },
             process.env.JWT_SECRET,
