@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import './profile.css';
 import './script.js';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
@@ -10,7 +10,7 @@ const EditProfile = () => {
   console.log(decoded.token.user)
 
   const [profilePic, setProfilePic] = useState(decoded.token.user.profilePic || null);
-  const [name, setName] = useState(decoded.token.user.username || '');
+  const [name, setName] = useState(decoded.token.user.username ||'');
   const [age, setAge] = useState(decoded.token.user.age || '');
   const [gender, setGender] = useState(decoded.token.user.gender || '');
   const [interests, setInterests] = useState(decoded.token.user.interests || []);
@@ -59,10 +59,10 @@ const EditProfile = () => {
         </select>
         <div className="interests">
           <label>Interests:</label>
-          <button className="interestBtn" id="ad</div>ventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
+          <button className="interestBtn" id="adventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
           <button className="interestBtn" id="culturalExplorationBtn" onClick={handleInterestClick}>Cultural Exploration</button>
           <button className="interestBtn" id="beachActivitiesBtn" onClick={handleInterestClick}>Beach Activities</button>
-          <button className="interestBtn" id="mountainClimbingBtn" onClick={handleInterestClick}>Mountain Climbing</button>
+          <button className="interestBtn" id="adventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
           <button className="interestBtn" id="wildlifeSafariBtn" onClick={handleInterestClick}>Wildlife Safari</button>
           <button className="interestBtn" id="scubaDivingBtn" onClick={handleInterestClick}>Scuba Diving</button>
           <button className="interestBtn" id="photographyBtn" onClick={handleInterestClick}>Photography</button>
