@@ -22,43 +22,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    
+    // Event listeners for interest buttons
+    const interestButtons = document.querySelectorAll('.interestBtn');
 
-    // Event listener for interest buttons
-    const adventureSportsBtn = document.getElementById('adventureSportsBtn');
-    const culturalExplorationBtn = document.getElementById('culturalExplorationBtn');
-    const beachActivitiesBtn = document.getElementById('beachActivitiesBtn');
+    function toggleInterestButton(button) {
+        button.classList.toggle('selected');
+    }
 
-    adventureSportsBtn.addEventListener('click', () => {
-        showRelatedOptions([
-            'Trekking',
-            'Rafting',
-            'Rock Climbing',
-            'Paragliding',
-            'Bungee Jumping',
-            'Skydiving'
-        ]);
-    });
-
-    culturalExplorationBtn.addEventListener('click', () => {
-        showRelatedOptions([
-            'Historical Sites',
-            'Museums',
-            'Local Cuisine',
-            'Festivals',
-            'Art Galleries'
-        ]);
-    });
-
-    beachActivitiesBtn.addEventListener('click', () => {
-        showRelatedOptions([
-            'Swimming',
-            'Sunbathing',
-            'Beach Volleyball',
-            'Surfing',
-            'Snorkeling',
-            'Jet Skiing'
-        ]);
+    interestButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            toggleInterestButton(button);
+            const interest = button.textContent;
+            if (interest === 'Mountain Climbing') {
+                showRelatedOptions([
+                    'Rock Climbing',
+                    'Ice Climbing',
+                    'Mountaineering',
+                    'Rappelling',
+                    'Canyoneering'
+                ]);
+            } else {
+                showRelatedOptions([]);
+            }
+        });
     });
 
     // Function to show related options for a given set of interests
@@ -70,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
             relatedOptionBtn.textContent = option;
             relatedOptions.appendChild(relatedOptionBtn);
             relatedOptionBtn.addEventListener('click', () => {
-                // Do something when related option button is clicked
+                toggleInterestButton(relatedOptionBtn);
             });
         });
-        relatedOptions.style.display = 'block';
+        relatedOptions.style.display = options.length > 0 ? 'block' : 'none';
     }
 
     // Location input functionality
