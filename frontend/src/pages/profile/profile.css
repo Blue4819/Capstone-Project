@@ -1,3 +1,4 @@
+/* styles.css */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,7 +21,6 @@ body {
 }
 
 form {
-    
     width: 100%;
     padding: 30px;
     background-color: rgba(255, 99, 71, 0.6); /* Light red background */
@@ -204,7 +204,3 @@ form input[type="file"] {
 .button:hover {
     background-color: #d1a165;
 }
-.container {
-    display: flex;
-}
-
