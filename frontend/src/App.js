@@ -1,11 +1,12 @@
-import Form from "./components/form";
+import LoginPage from "./pages/loginpage/login";
 import * as React from 'react';
-import logoImage from "./photos/Group 14.png"; 
-import RightImage from "./photos/imageligin.jpg";
-import RightImage2 from "./photos/light.png";
-import RightImage3 from "./photos/Rectangle 35.jpg";
-import RightImage4 from "./photos/img2.png";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/dashboard/dashboard";
+import Signup from "./pages/signup/signup";
+import EditProfile from "./pages/profile/editprofile.js";
+import NewPosts from "./pages/new posts/newposts.js";
+import PostDetails from "./pages/post/postdetails.js";
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() { 
   return (
@@ -13,66 +14,38 @@ function App() {
     <BrowserRouter>
     <div className="pages">
       <Routes>
-        <Route>
-          path="/"
-          element={}
-        </Route>
+        <Route path="/login" element={<ProtectedRoute><LoginPage /></ProtectedRoute>} />
+        <Route path="/signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/editprofile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+        <Route path="/newposts" element={<PrivateRoute><NewPosts /></PrivateRoute>} />
+        <Route path="/post" element={<PrivateRoute><PostDetails /></PrivateRoute>} />
+        <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>
     </BrowserRouter>
-    
-    <div>
-      {/* Header */}
-      <header className="bg-[#EBDFCE] py-4 px-9 flex items-center justify-between rounded-full">
-        {/* Logo */}
-        <img src={logoImage} alt="Holidate" className="h-20 rounded-xl" />
-        {/* Navigation */}
-        <nav className="flex items-center text-semi-bold text-lg">
-          <a href="#" className="hover:underline">Sign Up!</a>
-        </nav>
-      </header>
-      {/* Main Content */}
-      <div className="flex w-full h-screen">
-        <div></div>
-        <div className="w-full flex items-center justify-center lg:w-1/2">
-          <Form />
-        </div>
-        <div className="hidden relative lg:flex flex-col justify-center items-center w-1/2 bg-[#FFF6ED] rounded-lg p-4">
-          {/* Text Content */}
-          <h1 className="text-4xl text-gray-800 mb-4">Connect to new people and places!</h1>
-          {/* Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {/* First Row */}
-            <div className="flex justify-center items-center flex-col">
-              <p className="text-lg text-gray-600 mb-2"></p>
-              <img src={RightImage} alt="Additional Image" className="w-60 h-50 rounded-xl mb-3" />
-           
-            </div>
-            <div className="flex justify-center items-center flex-col">
-         
-              <img src={RightImage2} alt="Additional Image" className="w-60 h-50 rounded-xl mb-3" />
-            
-            </div>
-            {/* Second Row */}
-            <div className="flex justify-center items-center flex-col">
-              
-              <img src={RightImage3} alt="Additional Image" className="w-60 h-50 rounded-xl mb-3" />
-          
-            </div>
-            <div className="flex justify-center items-center flex-col">
-              
-              <img src={RightImage4} alt="Additional Image" className="w-60 h-50 rounded-xl mb-3" />
-          
-            </div>
-          </div>
-          {/* More Text */}
-          <h1 className="text-3xl text-gray-600 mt-4"><bold>See and share what you're up to!</bold></h1>
-        </div>
-      </div>
-    </div>
   </div>
   );
 }
 
 export default App;
 
+export function ProtectedRoute(props) {
+  const auth = JSON.parse(localStorage.getItem('auth'));
+
+  if (auth) {
+    return <Navigate to="/" replace />;
+  } else {
+    return props.children;
+  }
+}
+
+export function PrivateRoute(props) {
+  const auth = JSON.parse(localStorage.getItem('auth'));
+
+  if (!auth) {
+    return <Navigate to="/login" replace />;
+  } else {
+    return props.children;
+  }
+}

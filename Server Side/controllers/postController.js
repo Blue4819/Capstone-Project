@@ -1,16 +1,43 @@
 import Post from '../models/postModel.js';
+import multer from 'multer';
+
+// Multer configuration for storing files in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 export const newPost = async (req, res) => {
   try {
-    const { userId, location, activity, description, picturePath, userPicturePath } = req.body;
-    const post = new Post({ userId, location, activity, description, picturePath, userPicturePath });
-    await post.save();
-    res.json(post);
+    const { userId, location, activity, caption, userPicturePath } = req.body;
+
+    // Handle file upload
+    upload.single('picture')(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        console.error('Multer error:', err);
+        return res.status(400).json({ error: 'File upload error' });
+      } else if (err) {
+        console.error('Unknown error:', err);
+        return res.status(500).json({ error: 'Server error' });
+      }
+
+      // Access the uploaded file from req.file
+      const compressedImageBuffer = req.file.buffer;
+      const pictureBase64 = `data:${req.file.mimetype};base64,${compressedImageBuffer.toString('base64')}`;
+      const pictureData = Buffer.from(pictureBase64.split(',')[1], 'base64');
+
+      // Create a new post instance
+      const post = new Post({ userId, location, activity, caption, picture: { data: pictureData, contentType: req.file.mimetype }, userPicturePath });
+
+      // Save the post to the database
+      await post.save();
+
+      // Return the newly created post
+      res.status(201).json(post);
+    });
   } catch (error) {
-    console.log(error);
-    res.json({ error: "Failed to create post" });
+    //console.error('Error creating post:', error);
+    res.status(500).json({ error: 'Failed to create post' });
   }
-}
+};
 
 export const seePost = async (req,res) => {
   try {
