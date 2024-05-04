@@ -207,3 +207,9 @@ form input[type="file"] {
 .container {
     display: flex;
 }
+
+/* CSS */
+.interestBtn:active {
+    background-color: yellow;
+    /* Add any other styles to highlight the button */
+}
