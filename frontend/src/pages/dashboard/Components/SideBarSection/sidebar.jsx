@@ -30,7 +30,7 @@ const sidebar = () => {
                 <ul className="menulists grid">
 
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
+                        <a href="/dashboard" className='menuLink'>
                             <CiHome className="icon"/>
                             <span className="smalltext"></span>
                             Home
@@ -38,10 +38,10 @@ const sidebar = () => {
                     </li>
 
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
+                        <a href="/profile" className='menuLink'>
                             <TbMessageCirclePlus className="icon"/>
                             <span className="smalltext"></span>
-                            Messages
+                            Profile
                         </a>
                     </li>
 
@@ -62,7 +62,7 @@ const sidebar = () => {
                     </li>
 
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
+                        <a href="/newposts" className='menuLink'>
                             <GiWoodFrame className="icon"/>
                             <span className="smalltext"></span>
                             Create
