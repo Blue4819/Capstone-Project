@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Hide related options initially
     const relatedOptions = document.getElementById('relatedOptions');
-    relatedOptions.style.display = 'none';
+    if (relatedOptions) {
+        relatedOptions.style.display = 'none';
+    }
 
     // Event listener for image upload
     const profilePicInput = document.getElementById('profilePic');

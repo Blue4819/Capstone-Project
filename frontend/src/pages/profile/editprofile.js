@@ -4,6 +4,7 @@ import './profile.css';
 import './script.js';
 import { jwtDecode } from "jwt-decode";
 
+
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
   console.log(decoded)
@@ -31,6 +32,12 @@ const EditProfile = () => {
       setLocations([...locations, location]);
       e.target.previousElementSibling.value = '';
     }
+  };
+
+  const handleProfilePicChange = (e) => {
+    const profilePicInput = e.target;
+    const profilePicBase64Input = document.getElementById('profilePicBase64');
+    handleProfilePicChange(profilePicInput, profilePicBase64Input, setProfilePic);
   };
 
   const handleFormSubmit = (e) => {

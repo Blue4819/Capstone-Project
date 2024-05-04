@@ -8,7 +8,6 @@ const upload = multer({ storage: storage });
 export const newPost = async (req, res) => {
   try {
     const { userId, location, activity, caption, userPicturePath } = req.body;
-    console.log(req)
 
     // Handle file upload
     upload.single('picture')(req, res, async (err) => {
@@ -21,10 +20,12 @@ export const newPost = async (req, res) => {
       }
 
       // Access the uploaded file from req.file
-      const picture = req.picture;
+      const compressedImageBuffer = req.file.buffer;
+      const pictureBase64 = `data:${req.file.mimetype};base64,${compressedImageBuffer.toString('base64')}`;
+      const pictureData = Buffer.from(pictureBase64.split(',')[1], 'base64');
 
       // Create a new post instance
-      const post = new Post({ userId, location, activity, caption, picture, userPicturePath });
+      const post = new Post({ userId, location, activity, caption, picture: { data: pictureData, contentType: req.file.mimetype }, userPicturePath });
 
       // Save the post to the database
       await post.save();

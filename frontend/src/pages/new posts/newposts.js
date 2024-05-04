@@ -41,17 +41,29 @@ const NewPosts = () => {
   };
 
   const handlePost = async () => {
-      try {
-        console.log({ userId, location, activity, caption, picture, userPicturePath })
-        const res = await axios.post("/post/new", { userId, location, activity, caption, picture, userPicturePath });
-        console.log('Post uploaded successfully:', res.data);
-        // You can add further handling here, like redirecting or updating state.
-      } catch (error) {
-        console.error('Error uploading post:', error);
-        // Handle error appropriately, such as displaying an error message.
-      }
-    
-  };
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('location', location);
+    formData.append('activity', activity);
+    formData.append('caption', caption);
+    formData.append('picture', picture);
+    formData.append('userPicturePath', userPicturePath);
+    try {
+      console.log(formData);
+      const res = await axios.post('/post/new', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log('Post uploaded successfully:', res.data);
+    // You can add further handling here, like redirecting or updating state.
+    if(res.status === 200)
+        window.location.href = '/dashboard';
+    } catch (error) {
+      console.error('Error uploading post:', error);
+      // Handle error appropriately, such as displaying an error message.
+    }
+}
 
   return (
     <div className="container">
