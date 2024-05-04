@@ -2,7 +2,9 @@ import LoginPage from "./pages/loginpage/login";
 import * as React from 'react';
 import Dashboard from "./pages/dashboard/dashboard";
 import Signup from "./pages/signup/signup";
-import EditProfile from "./pages/profile/editprofile.js"
+import EditProfile from "./pages/profile/editprofile.js";
+import NewPosts from "./pages/new posts/newposts.js";
+import PostDetails from "./pages/post/postdetails.js";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signup" element={<ProtectedRoute><Signup /></ProtectedRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/editprofile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+        <Route path="/newposts" element={<PrivateRoute><NewPosts /></PrivateRoute>} />
+        <Route path="/post" element={<PrivateRoute><PostDetails /></PrivateRoute>} />
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>

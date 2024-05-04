@@ -204,3 +204,6 @@ form input[type="file"] {
 .button:hover {
     background-color: #d1a165;
 }
+.container {
+    display: flex;
+}
