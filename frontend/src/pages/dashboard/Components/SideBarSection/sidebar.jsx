@@ -1,5 +1,6 @@
 import React from 'react';
 import './sidebar.css';
+import { useNavigate } from 'react-router-dom';
 
 // import images
 import logo from '../../Assests/logo.png';
@@ -13,9 +14,19 @@ import { GiWoodFrame } from "react-icons/gi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoLogInOutline } from "react-icons/io5";
 import { BsQuestionCircle } from "react-icons/bs";
+import { FaPerson } from "react-icons/fa6";
 
+const Sidebar = () => {
+    const navigate = useNavigate();
 
-const sidebar = () => {
+    const handleLogout = () => {
+        // Delete the auth object from localStorage
+        localStorage.removeItem('auth');
+    
+        // Redirect the user to the login page
+        navigate('/login');
+    };
+      
     return (
         <div className='sideBar grid'>
             <div className='logoDiv flex'>
@@ -24,11 +35,10 @@ const sidebar = () => {
 
             <div className="menuDiv">
                 <h2 className="divTitle">
-                MENU
+                    MENU
                 </h2>
 
                 <ul className="menulists grid">
-
                     <li className="listitems">
                         <a href="/dashboard" className='menuLink'>
                             <CiHome className="icon"/>
@@ -39,7 +49,7 @@ const sidebar = () => {
 
                     <li className="listitems">
                         <a href="/profile" className='menuLink'>
-                            <TbMessageCirclePlus className="icon"/>
+                            <FaPerson className="icon"/>
                             <span className="smalltext"></span>
                             Profile
                         </a>
@@ -77,13 +87,12 @@ const sidebar = () => {
                         </a>
                     </li>
 
-
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
-                            < IoLogInOutline className="icon"/>
+                        <button className='menuLink' onClick={handleLogout}>
+                            <IoLogInOutline className="icon"/>
                             <span className="smalltext"></span>
                             Log Out
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -91,21 +100,17 @@ const sidebar = () => {
             <div className='sideBarCard'>
                 <BsQuestionCircle className="icon"/>
                 <div className='cardContent'>
-                <div className='circle1'></div>
-                <div className='circle2'></div>
+                    <div className='circle1'></div>
+                    <div className='circle2'></div>
 
-                <h3 className='helpContent'>Help Center</h3>
-                <p>Having trouble, please contact for more questions.</p>
+                    <h3 className='helpContent'>Help Center</h3>
+                    <p>Having trouble, please contact for more questions.</p>
 
-                <button className='btn'>Go to help center </button>
+                    <button className='btn'>Go to help center </button>
                 </div>     
             </div>
-
-
-
-
         </div>
     );
 }
 
-export default sidebar;
+export default Sidebar;
