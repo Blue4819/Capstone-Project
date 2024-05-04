@@ -9,18 +9,18 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  padding-top: 20px; /* Add some top padding */
 }
 
 .post-form {
   width: 75%;
-  margin: auto;
   background-color: #f5deb3; /* Sand color */
   padding: 40px 20px;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Add bottom margin */
 }
 
 .post-form h1 {
@@ -62,4 +62,17 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.post-container {
+  margin-bottom: 20px;
+}
+
+.post-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hidden {
+  display: none;
 }

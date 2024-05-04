@@ -14,12 +14,17 @@
         <textarea id="postContent" rows="5" placeholder="What's on your mind?"></textarea>
       </div>
       <div class="input-wrapper">
-        <input type="file" id="postImage" accept="image/*">
+        <input type="file" id="postImage" accept="image/*" onchange="previewImage(event)">
       </div>
-      <button onclick="uploadPost()">Post</button>
+      <div id="previewContainer"></div> <!-- Preview container -->
+      <button onclick="cropAndPost()">Post</button>
     </div>
   </div>
 
+  <div id="postPreviews"></div> <!-- Post previews container -->
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
