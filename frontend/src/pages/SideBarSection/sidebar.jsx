@@ -1,9 +1,9 @@
 import React from 'react';
 import './sidebar.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation} from 'react-router-dom';
 
 // import images
-import logo from '../../Assests/logo.png';
+import logo from '../photos/logo.png';
 
 // import icons
 import { CiHome } from 'react-icons/ci';
@@ -18,6 +18,11 @@ import { FaPerson } from "react-icons/fa6";
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isLoginPage = location.pathname ==='/login';
+    const isSignupPage = location.pathname ==='/signup';
+    if ( isLoginPage || isSignupPage) return null;
 
     const handleLogout = () => {
         // Delete the auth object from localStorage
@@ -80,7 +85,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
+                        <a href="/editprofile" className='menuLink'>
                             < IoSettingsOutline className="icon"/>
                             <span className="smalltext"></span>
                             Settings

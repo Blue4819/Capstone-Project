@@ -5,6 +5,11 @@ import {jwtDecode} from "jwt-decode";
 import bcrypt from "bcrypt";
 import auth from "../middleware/auth.js";
 import axios from 'axios';
+import multer from 'multer';
+
+// Multer configuration for storing files in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 config();
 
@@ -160,27 +165,48 @@ export const googleSignup = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 export const saveInfo = async (req, res) => {
   try {
-    const saved = await User.updateOne(
-      { _id: req.body.id },
-      {
-        $set: {
-          firstName: req.body.info.firstName,
-          lastName: req.body.info.lastName,
-          email: req.body.info.email,
-          picturePath: req.body.info.picturePath,
-          location: req.body.info.location,
-          bio: req.body.info.bio,
-          gender: req.body.info.gender,
-          dob: req.body.info.dob,
-        },
+    // Handle file upload
+    upload.single('picture')(req, res, async (err) => {
+      try {
+        if (err instanceof multer.MulterError) {
+          console.error('Multer error:', err);
+          return res.status(400).json({ error: 'File upload error' });
+        } else if (err) {
+          console.error('Unknown error:', err);
+          return res.status(500).json({ error: 'Server error' });
+        }
+
+        // Access the uploaded file from req.file
+        const compressedImageBuffer = req.file.buffer;
+        const pictureBase64 = `data:${req.file.mimetype};base64,${compressedImageBuffer.toString('base64')}`;
+        const pictureData = Buffer.from(pictureBase64.split(',')[1], 'base64');
+
+        const saved = await User.updateOne(
+          { _id: req.body.id },
+          {
+            $set: {
+              firstName: req.body.info.firstName,
+              lastName: req.body.info.lastName,
+              email: req.body.info.email,
+              picture: { data: pictureData, contentType: req.file.mimetype },
+              location: req.body.info.location,
+              bio: req.body.info.bio,
+              gender: req.body.info.gender,
+              age: req.body.info.age,
+            },
+          }
+        );
+        res.status(200).json(saved);
+      } catch (error) {
+        console.error('Error saving user info:', error);
+        res.status(500).json({ error: 'Server error' });
       }
-    );
-    res.status(200).json(saved);
+    });
   } catch (error) {
-    res.json({ error });
+    console.error('Error handling file upload:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 };
 
@@ -196,15 +222,13 @@ export const profileInfo = async (req, res) => {
 
 export const ownProfileInfo = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    if (req.currentUser._id.toString() !== id) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+    const id = req.params.id;
+    console.log(id)
 
     const user = await User.findOne({ _id: id });
+    console.log(user)
 
-    res.json(user);
+    res.status(200).json(user);
   } catch (error) {
     res.json({ error });
   }

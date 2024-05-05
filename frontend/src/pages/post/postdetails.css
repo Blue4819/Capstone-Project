@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+:root {
+  --PrimaryColor: #ffefe3;
+  --HoverColor: #bdbdbd;
+  --paleGreen: hsl(96,75%,89%);
+  --whiteColor: hsl(0,0%,100%);
+  --blackColor: hsl(0, 100%, 3%);
+  --textColor: hsl(240, 1%, 35%);
+  --bgColor: #fff4db;
+  --greyText: rgb(190,190,190);
+  --Green: #C7D6A1;
+  --RED:#E88073;
+  --inputColor: var(--Green);
+  /* Font and Typography */
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 1.5rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: .938rem;
+  --smallFontSize: .813rem;
+  --smallestFontSize: .75rem;
+}
+
+.sidebar {
+  flex:1;
+  margin-right: 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 4px var(--textColor);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: var(--h1FontSize);
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  font-size: var(--normalFontSize);
+  margin-bottom: 1rem;
+}
+
+.card-text strong {
+  font-weight: 600;
+}

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import './profile.css';
-import './script.js';
 import { jwtDecode } from "jwt-decode";
 
 
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
-  console.log(decoded)
-  console.log(decoded.token.user)
 
   const [profilePic, setProfilePic] = useState(decoded.token.user.profilePic || null);
   const [name, setName] = useState(decoded.token.user.username ||'');

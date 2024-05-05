@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../SideBarSection/sidebar';
 
 const activities = ['Trekking', 'Rafting', 'Rock Climbing', 'Paragliding', 'Bungee Jumping', 'Skydiving', 
 'Historical Sites', 'Museums', 'Local Cuisine', 'Festivals', 'Art Galleries', 'Swimming', 
@@ -8,6 +10,8 @@ const activities = ['Trekking', 'Rafting', 'Rock Climbing', 'Paragliding', 'Bung
 'Wildlife Safari', 'Scuba Diving'];
 
 const NewPosts = () => {
+  const navigate = useNavigate();
+
   const decoded = JSON.parse(localStorage.getItem('auth'));
   const userId = decoded.token.user._id;
   const userPicturePath = decoded.token.user.picturePath;
@@ -54,19 +58,21 @@ const NewPosts = () => {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      })
-      console.log('Post uploaded successfully:', res.data);
-    // You can add further handling here, like redirecting or updating state.
-    if(res.status === 200)
-        window.location.href = '/dashboard';
+      });
+      console.log('Post uploaded successfully:', res.data._id);
+      if (res.status === 200) {
+        const ID = res.data._id;
+        navigate(`/post/${ID}`, { state: { data: ID } });
+      }
     } catch (error) {
       console.error('Error uploading post:', error);
       // Handle error appropriately, such as displaying an error message.
     }
-}
+  };
 
   return (
     <div className="container">
+      <Sidebar />
       <div className="post-form">
         <h1>New Post</h1>
         <div className="input-wrapper">

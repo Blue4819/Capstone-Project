@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, max: 50, unique: true },
   password: { type: String, required: true, min: 8 },
-  picturePath: {data: Buffer, contentType: String},
+  picturePath: {data: String, contentType: String},
   following: [{ type: Schema.Types.ObjectId, ref: "User" }],
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   followed_locations: [{ type: Schema.Types.ObjectId, ref: "Location" }],

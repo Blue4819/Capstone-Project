@@ -19,7 +19,7 @@ function App() {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/editprofile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
         <Route path="/newposts" element={<PrivateRoute><NewPosts /></PrivateRoute>} />
-        <Route path="/post" element={<PrivateRoute><PostDetails /></PrivateRoute>} />
+        <Route path="/post/:id" element={<PrivateRoute><PostDetails /></PrivateRoute>} />
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>

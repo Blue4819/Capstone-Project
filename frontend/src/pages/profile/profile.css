@@ -8,6 +8,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-image: url('travelling.jpg');
+    overflow-y: auto;
 }
 
 .container {
@@ -17,6 +18,7 @@ body {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 form {
@@ -27,6 +29,7 @@ form {
     border-radius: 20px;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3); /* Shadow effect */
     transition: transform 0.3s ease;
+    overflow-y: auto;
 }
 
 form:hover {
@@ -43,6 +46,7 @@ form h1 {
 .profile-pic-container {
     text-align: center;
     margin-bottom: 20px;
+    overflow-y: auto;
 }
 
 .profile-pic {
@@ -103,22 +107,28 @@ form input[type="file"] {
     display: none;
 }
 
+  
 .interests {
     color: #fff; /* White text */
     margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line if necessary */
+    gap: 10px; /* Add spacing between buttons */
+    overflow-y: auto;
 }
 
 .interestBtn {
     margin-right: 10px;
     margin-bottom: 10px;
-    padding: 15px 30px;
+    padding: 10px 20px; /* Adjusted padding */
     background-color: #f3d9b6; /* Sandy color */
     color: #000; /* Black text */
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px; /* Adjusted font size */
     transition: background-color 0.3s ease;
+    max-width: calc(33.33% - 10px);
 }
 
 .interestBtn:hover {
@@ -199,6 +209,7 @@ form input[type="file"] {
     color: black;
     border: none;
 }
+
 
 /* Hover effects */
 .button:hover {

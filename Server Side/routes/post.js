@@ -11,7 +11,7 @@ const router = express.Router();
 // go to specific post
 router.post('/new', upload.single('picture'), newPost);
 
-router.get('/:id', seePost);
+router.get('/view/:id', seePost);
 
 router.get('/:userId/posts', getUserPosts);
 

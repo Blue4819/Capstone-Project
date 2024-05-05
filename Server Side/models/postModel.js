@@ -11,7 +11,7 @@ const postSchema = new Schema({
   location: String,
   activity: { type: String, default: ''},
   caption: String,
-  picture: {data: Buffer, contentType: String},
+  picture: {data: String, contentType: String},
   userPicturePath: String,
   likes: { type: Map, of: Boolean },
   comments: [{ type: String, default: [] }],

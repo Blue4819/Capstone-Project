@@ -22,7 +22,7 @@ export const newPost = async (req, res) => {
       // Access the uploaded file from req.file
       const compressedImageBuffer = req.file.buffer;
       const pictureBase64 = `data:${req.file.mimetype};base64,${compressedImageBuffer.toString('base64')}`;
-      const pictureData = Buffer.from(pictureBase64.split(',')[1], 'base64');
+      const pictureData = pictureBase64.split(',')[1];
 
       // Create a new post instance
       const post = new Post({ userId, location, activity, caption, picture: { data: pictureData, contentType: req.file.mimetype }, userPicturePath });
@@ -31,7 +31,7 @@ export const newPost = async (req, res) => {
       await post.save();
 
       // Return the newly created post
-      res.status(201).json(post);
+      res.status(200).json(post);
     });
   } catch (error) {
     //console.error('Error creating post:', error);
@@ -39,10 +39,17 @@ export const newPost = async (req, res) => {
   }
 };
 
-export const seePost = async (req,res) => {
+
+export const seePost = async (req, res) => {
   try {
-    const { id } = req.params;
-    const post = await Post.findOne({ _id: id });
+    const ID = req.params.id;
+    console.log(ID);
+    const post = await Post.findOne({ _id: ID });
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
     res.json(post);
   } catch (error) {
     res.json({ error });
