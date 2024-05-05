@@ -1,38 +1,41 @@
-// profile.js
-document.addEventListener('DOMContentLoaded', () => {
-    const profileId = 'your-profile-id'; // Replace with the actual profile ID
+import React from 'react';
+import './profile.css'; // Import CSS file
 
-    fetch(`/api/profile/${profileId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(profileData => {
-            // Update profile information on the page
-            document.getElementById('profilePicPreview').src = 'profile-pic.jpg'; // Placeholder path
-            document.getElementById('name').textContent = profileData.name || 'Name';
-            document.getElementById('age').textContent = profileData.age || 'Age';
-            document.getElementById('gender').textContent = profileData.gender || 'Gender';
+class Profile extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <h1 id="userName">Profile Page</h1>
+        <div className="profile-pic-container">
+          <img id="profilePicPreview" className="profile-pic" src="#" alt="Profile Picture Preview" />
+        </div>
+        <div className="user-details">
+          <div className="detail">
+            <label htmlFor="name">Name:</label>
+            <span id="name"></span>
+          </div>
+          <div className="detail">
+            <label htmlFor="age">Age:</label>
+            <span id="age"></span>
+          </div>
+          <div className="detail">
+            <label htmlFor="gender">Gender:</label>
+            <span id="gender"></span>
+          </div>
+        </div>
+        <hr className="separator" />
+        <div className="interests">
+          <label>Interests:</label>
+          <ul id="interestsList"></ul>
+        </div>
+        <hr className="separator" />
+        <div className="locations">
+          <label htmlFor="locationInput">Visited Places:</label>
+          <ul id="locationsList"></ul>
+        </div>
+      </div>
+    );
+  }
+}
 
-            const interestsList = document.getElementById('interestsList');
-            interestsList.innerHTML = ''; // Clear previous content
-            profileData.interests.forEach(interest => {
-                const li = document.createElement('li');
-                li.textContent = interest;
-                interestsList.appendChild(li);
-            });
-
-            const locationsList = document.getElementById('locationsList');
-            locationsList.innerHTML = ''; // Clear previous content
-            profileData.locations.forEach(location => {
-                const li = document.createElement('li');
-                li.textContent = location;
-                locationsList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error.message);
-        });
-});
+export default Profile;
