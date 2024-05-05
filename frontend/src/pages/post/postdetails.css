@@ -29,8 +29,9 @@
 }
 
 .container {
-  max-width: 75%; /* Adjust max-width of container */
-  margin: 0 auto;
+ /* Adjust max-width of container */
+
+  margin: auto;
   padding: 0 2rem;
 }
 

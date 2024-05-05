@@ -44,14 +44,14 @@ textarea, input[type="file"] {
 }
 
 textarea:focus, input[type="file"]:focus {
-  border-color: #007bff;
+  border-color: #fff;
 }
 
 button {
   display: block;
-  width: 100%;
+
   padding: 12px;
-  background-color: #007bff;
+  background-color: #e88074;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -61,7 +61,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #d04738;
 }
 
 .post-container {
@@ -91,7 +91,7 @@ select {
 }
 
 select:focus {
-  border-color: #007bff;
+  border-color: #e88074;
 }
 
 .image-preview {
