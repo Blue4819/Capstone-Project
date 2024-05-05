@@ -22,6 +22,7 @@ const PostDetails = () => {
   const [base64String, setBase64String] = useState('');
   const [isOwner, setIsOwner] = useState(false); // State to track if current user is owner of post
   const [showModal, setShowModal] = useState(false); // State to track if modal is shown or hidden
+  const modalRef = React.useRef(null); // Add ref to Modal component
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -77,6 +78,11 @@ const PostDetails = () => {
     setShowModal(false);
   };
 
+  // Call handleClose method on modalRef when close button is clicked
+  const handleCloseButtonClick = () => {
+    handleCloseModal();
+  };
+
   return (
     <div className="container">
       <Sidebar className="sidebar" />
@@ -107,6 +113,7 @@ const PostDetails = () => {
         )}
       </div>
       <Modal
+        ref={modalRef} // Add ref to Modal component
         show={showModal}
         onHide={handleCloseModal}
         dialogClassName="custom-modal" // Add custom class name to style the modal
@@ -138,10 +145,10 @@ const PostDetails = () => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" onClick={handleCloseButtonClick}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleCloseModal}>
+          <Button variant="primary" onClick={handleCloseButtonClick}>
             Save Changes
           </Button>
         </Modal.Footer>
