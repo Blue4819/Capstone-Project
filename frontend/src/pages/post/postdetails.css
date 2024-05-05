@@ -22,16 +22,16 @@
   --smallestFontSize: .75rem;
 }
 
-.sidebar {
-  flex:1;
-  margin-right: 20px;
+.sidebar{
+  margin-top: auto;
+  width: 25%; /* Adjust width of sidebar */
+  background-color: var(--bgColor); /* Optional: Set background color */
 }
 
 .container {
-  max-width: 960px;
+  max-width: 75%; /* Adjust max-width of container */
   margin: 0 auto;
   padding: 0 2rem;
-  display: flex;
 }
 
 .card {

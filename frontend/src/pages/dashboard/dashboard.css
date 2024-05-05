@@ -6,8 +6,6 @@
     margin: 0;
     font-family: "Didact Gothic", sans-serif;
     transform: .3s ease;
-    
-    
 }
 
 /* Colors and styles (defaults) */
@@ -90,6 +88,19 @@ body{
     padding: 1rem ;
 }
 
+.dashboard-container{
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF6ED;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 8px var(--greyText);
+}
+
 .container{
     position: relative;
     width: 95vw;
@@ -101,9 +112,6 @@ body{
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 2px 2px 8px var(--greyText);
-    display: flex; /* Use flexbox */
-    align-items: flex-start; /* Align items at the start of the cross axis */
-    justify-content: flex-start;
 }
 
 ::-webkit-scrollbar{
