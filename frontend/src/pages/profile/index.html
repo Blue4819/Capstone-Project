@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="container">
+        <form id="profileForm">
+            <h1>Profile Page</h1>
+            <div class="profile-pic-container">
+                <img id="profilePicPreview" class="profile-pic" src="#" alt="Profile Picture Preview">
+                <label for="profilePic" class="upload-btn">Upload Profile Picture</label>
+                <input type="file" id="profilePic" name="profilePic" accept="image/*" required>
+            </div>
+            <input type="hidden" id="profilePicBase64" name="profilePicBase64">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="interests">
+                <label>Interests:</label>
+                <button class="interestBtn" id="adventureSportsBtn">Adventure Sports</button>
+                <button class="interestBtn" id="culturalExplorationBtn">Cultural Exploration</button>
+                <button class="interestBtn" id="beachActivitiesBtn">Beach Activities</button>
+                <button class="interestBtn" id="mountainClimbingBtn">Mountain Climbing</button>
+                <button class="interestBtn" id="wildlifeSafariBtn">Wildlife Safari</button>
+                <button class="interestBtn" id="scubaDivingBtn">Scuba Diving</button>
+                <button class="interestBtn" id="photographyBtn">Photography</button>
+                <button class="interestBtn" id="foodExplorationBtn">Food Exploration</button>
+                <button class="interestBtn" id="cyclingBtn">Cycling</button>
+                <button class="interestBtn" id="yogaBtn">Yoga</button>
+                <button class="interestBtn" id="skiingBtn">Skiing</button>
+                <button class="interestBtn" id="surfingBtn">Surfing</button>
+                <button class="interestBtn" id="raftingBtn">Rafting</button>
+                <button class="interestBtn" id="rockClimbingBtn">Rock Climbing</button>
+                <button class="interestBtn" id="paraglidingBtn">Paragliding</button>
+                <button class="interestBtn" id="bungeeJumpingBtn">Bungee Jumping</button>
+                <button class="interestBtn" id="skydivingBtn">Skydiving</button>
+                <button class="interestBtn" id="horsebackRidingBtn">Horseback Riding</button>
+                <button class="interestBtn" id="kayakingBtn">Kayaking</button>
+                <button class="interestBtn" id="fishingBtn">Fishing</button>
+
+            </div>
+            
+            
+            <div class="locations">
+                <label for="locationInput">Visited Places in India:</label>
+                <div id="locationsContainer">
+                    <input type="text" id="locationInput" placeholder="Enter a location">
+                </div>
+                <div id="locationsList"></div>
+            </div>
+            
+            <button type="submit" class="upload-btn">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
