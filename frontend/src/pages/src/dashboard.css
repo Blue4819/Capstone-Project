@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: "Didact Gothic", sans-serif;
+    transform: .3s ease;
+    
+    
+}
+
+/* Colors and styles (defaults) */
+
+:root{
+    --PrimaryColor: #ffeada;
+    --HoverColor: #bdbdbd;
+    --paleGreen: hsl(96,75%,89%);
+    --whiteColor: hsl(0,0%,100%);
+    --blackColor: hsl(0, 0%, 18%);
+    --textColor: hsl(240,1%,48%);
+    --greyText: rgb(190,190,190);
+    --Green: #C7D6A1;
+    --inputColor: var(--Green);
+
+
+/* Font and Typography */
+    --biggestFontSize: 2.5rem;
+    --h1FontSize: 1.5rem;
+    --h2FontSize: 1.25rem;
+    --h3FontSize: 1rem;
+    --normalFontSize: .938rem;
+    --smallFontSize: .813rem;
+    --smallestFontSize: .75rem;
+}
+
+/* Default Styles */
+html{
+    font-size: 90%;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.icon{
+    font-size: var(--h2FontSize);
+    cursor: pointer;
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+.grid{
+    display: grid;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px #ffeada;
+    padding: .8rem 1rem;
+    color: #000;
+}
+
+.btn .icon{
+    margin-left: .5rem;
+}
+
+.btn:hover{
+    background:#C7D6A1;
+    color: var(--PrimaryColor);
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 1rem ;
+}
+
+.container{
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF6ED;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 8px var(--greyText);
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

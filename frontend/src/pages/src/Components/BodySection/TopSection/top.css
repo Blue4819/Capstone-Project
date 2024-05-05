@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+:root {
+  --PrimaryColor: #ffefe3;
+  --HoverColor: #bdbdbd;
+  --paleGreen: hsl(96,75%,89%);
+  --whiteColor: hsl(0,0%,100%);
+  --blackColor: hsl(0, 100%, 3%);
+  --textColor: hsl(240, 1%, 35%);
+  --bgColor: #fff4db;
+  --greyText: rgb(190,190,190);
+  --Green: #C7D6A1;
+  --RED:#E88073;
+  --inputColor: var(--Green);
+  /* Font and Typography */
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 1.5rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: .938rem;
+  --smallFontSize: .813rem;
+  --smallestFontSize: .75rem;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+}
+.topSection .cardSection {
+  display: flex;
+  flex-direction: row; /* Display children elements in a row */
+  gap: 2rem; /* Add gap between the cards */
+  justify-content: flex-start; /* Align cards to the left */
+}
+.topSection .leftCard {
+  flex: 1; /* Let the card take up available space */
+  /* Other styles */
+}
+.topSection .cardSection {
+  margin-top: 1rem;
+}
+.topSection .cardSection h1, .topSection .cardSection p, .topSection .cardSection .btn {
+  position: relative;
+  z-index: 200;
+}
+.topSection .cardSection h1 {
+  font-family: Inter, sans-serif;
+  font-size: larger;
+  color: var(--whiteColor);
+  font-weight: 900;
+}
+.topSection .cardSection p {
+  font-family: Inter, sans-serif;
+  font-size: var(--h3FontSize);
+  padding: 0.5rem;
+  color: var(--blackColor);
+  font-weight: 300;
+}
+.topSection .cardSection .btn {
+  box-shadow: none;
+  padding: 0.2rem 0.8rem;
+  font-size: var(--h2FontSize);
+  color: #014b1b;
+  background: #fff4db;
+  font-weight: 500;
+}
+.topSection .cardSection .btn:hover {
+  background-color: var(--Green);
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
+.title h1 {
+  font-size: 3rem;
+  color: var(--blackColor);
+  font-weight: 900;
+}
+
+.title p {
+  font-size: 1.5rem;
+  color: var(--textColor);
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Add gap between input and icon */
+  margin-right: 10rem; /* Remove left margin */
+  padding: 1rem; /* Add padding to match other sections */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--inputColor);
+  background-color: var(--whiteColor);
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.icon {
+  color: var(--blackColor);
+  font-size: 20px;
+}
+.icon:hover {
+  color: var(--RED);
+}
+
+.userDiv {
+  gap: 0.5rem;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilePhoto {
+  width: 80px; /* Adjust as needed */
+  height: 80px; /* Adjust as needed */
+  border-radius: 50%;
+  cursor: pointer; /* Add cursor pointer for clickable effect */
+}
+
+.username {
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  color: var(--blackColor);
+  cursor: pointer; /* Add cursor pointer for clickable effect */
+}
+
+.bio, .location {
+  margin-top: 1px;
+  text-align: center;
+  color: var(--textColor);
+}
+
+.textDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textDiv .flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.textDiv .flex span {
+  display: flex;
+  align-items: center;
+}
+
+.textDiv .flex span small {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--textColor);
+}
+
+.rightCard {
+  width: 50%; /* Take up 40% of the space */
+  margin-left: 0; /* aligns left */
+
+}
+
+.mediaContent video {
+  width: 100%; /* Make the video fill the container */
+  max-width: 100%; /* Ensure the video doesn't exceed its container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.cardSection {
+  display: flex;
+  justify-content: flex-start; /* Align the card section to the left */
+  align-items: flex-start; /* Align items to the top */
+  padding: 1rem; /* Add padding to the card section */
+}
+
+.postDetails {
+  width: 100%; /* Take up full width inside the right card */
+  padding: 1rem;
+  border: 1px solid var(--textColor); /* Border around post details */
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem; /* Add space between post details and actions */
+}
+
+.commentsSection {
+  margin-top: 1rem; /* Add space between comment button and comments section */
+  /* Other styles for comments section */
+}
+
+/* Bootstrap styles for comment input */
+.commentsSection input[type="comment"] {
+  width: 100%; /* Make the width equal to the post details card */
+  padding: .5rem; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid var(--HoverColor); /* Border color */
+  outline: none; /* Remove outline */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Add transition effect */
+}
+
+.commentsSection input[type="comment"]:focus {
+  border-color: var(--PrimaryColor); /* Change border color on focus */
+  box-shadow: 0 0 0 0 1rem #000d04; 
+}
