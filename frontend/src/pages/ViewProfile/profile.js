@@ -1,10 +1,14 @@
 import React from 'react';
-import './profile.css'; // Import CSS file
+import './viewprofile.css'; // Import CSS file
+import Sidebar from '../SideBarSection/sidebar';
+
 
 class Profile extends React.Component {
   render() {
     return (
+      
       <div className="container">
+        <Sidebar/>
         <h1 id="userName">Profile Page</h1>
         <div className="profile-pic-container">
           <img id="profilePicPreview" className="profile-pic" src="#" alt="Profile Picture Preview" />

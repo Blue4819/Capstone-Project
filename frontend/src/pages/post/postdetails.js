@@ -84,34 +84,37 @@ const PostDetails = () => {
   };
 
   return (
-    <div className="container">
+    <div className="edit-postcontainer">
       <Sidebar className="sidebar" />
-      <div className="container py-5">
-        <h1 className="mb-4">Post Details</h1>
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error}</div>}
-        {post && (
-          <div className="card mb-4">
-            <img src={`data:${post.picture.contentType};base64,${base64String}`} alt="Image" />
-            <div className="card-body">
-              <h5 className="card-title">{post.caption}</h5>
-              <p className="card-text"><strong>Activity:</strong> {post.activity}</p>
-              <p className="card-text"><strong>Location:</strong> {post.location}</p>
-              {isOwner ? ( // If owner, show edit and delete buttons
-                <div>
-                  <button onClick={handleEdit}>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
-                </div>
-              ) : ( // If not owner, show like and comment buttons
-                <div>
-                  <button onClick={handleLike}>Like</button>
-                  <button onClick={handleComment}>Comment</button>
-                </div>
-              )}
+      <div className='container'>
+        <div className="container py-5">
+          <h1 className="mb-4">Post Details</h1>
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          {post && (
+            <div className="card mb-4">
+              <img src={`data:${post.picture.contentType};base64,${base64String}`} alt="Image" />
+              <div className="card-body">
+                <h5 className="card-title">{post.caption}</h5>
+                <p className="card-text"><strong>Activity:</strong> {post.activity}</p>
+                <p className="card-text"><strong>Location:</strong> {post.location}</p>
+                {isOwner ? ( // If owner, show edit and delete buttons
+                  <div>
+                    <button onClick={handleEdit}>Edit</button>
+                    <button onClick={handleDelete}>Delete</button>
+                  </div>
+                ) : ( // If not owner, show like and comment buttons
+                  <div>
+                    <button onClick={handleLike}>Like</button>
+                    <button onClick={handleComment}>Comment</button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </div> {/* Closing tag for <div className='container'> */}
+      
       <Modal
         ref={modalRef} // Add ref to Modal component
         show={showModal}

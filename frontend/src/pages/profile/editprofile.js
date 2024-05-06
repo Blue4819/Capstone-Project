@@ -43,14 +43,14 @@ const EditProfile = () => {
 
   return (
     <div className="container">
-       <Sidebar />
-      <form id="profileForm" onSubmit={handleFormSubmit}>
-        <h1>Profile Page</h1>
+      <Sidebar/>
         <div className="profile-pic-container">
+        <h1>Profile Page</h1>
           <img id="profilePicPreview" className="profile-pic" src={profilePic || '#'} alt="Profile Picture Preview" />
           <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
           <input type="file" id="profilePic" name="profilePic" accept="image/*" onChange={(e) => setProfilePic(e.target.files[0])} />
         </div>
+      <form id="profileForm" onSubmit={handleFormSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
         <label htmlFor="age">Age:</label>
