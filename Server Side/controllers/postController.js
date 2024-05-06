@@ -56,6 +56,50 @@ export const seePost = async (req, res) => {
   }
 }
 
+export const updatePost = async (req, res) => {
+  try {
+    const ID = req.params.id; // Get the post ID from request parameters
+    console.log(ID);
+
+    // Find the post by ID
+    const post = await Post.findOne({ _id: ID });
+
+    // Check if post exists
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    // Update the post fields
+    post.caption = req.body.caption || post.caption;
+    post.activity = req.body.activity || post.activity;
+    post.location = req.body.location || post.location;
+
+    // Save the updated post
+    const updatedPost = await post.save();
+
+    // Return the updated post
+    res.json(updatedPost);
+  } catch (error) {
+    // Handle errors
+    res.json({ error });
+  }
+}
+
+export const deletePost = async (req, res) => {
+  try {
+    const ID = req.params.id; // Get the post ID from request parameters
+
+    // Find the post by ID
+    const post = await Post.findOneAndDelete({ _id: ID });
+
+    // Return success message
+    res.json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
 export const getUserPosts = async(req,res) => {
   try {
     const { userId } = req.params;

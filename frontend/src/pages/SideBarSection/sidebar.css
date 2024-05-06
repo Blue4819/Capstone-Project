@@ -22,12 +22,11 @@
 }
 
 .sideBar {
-  margin-top: auto;
   background: var(--Green);
   box-shadow: 1px 0px 4px var(--greyText);
+  margin-top: auto;
   gap: 1rem;
-  overflow-y: auto; /* Change overflow property */
- 
+  overflow: scroll;
 }
 
 .sideBar .menulists {
@@ -119,12 +118,11 @@
   z-index: 100;
 }
 .sideBar .sideBarCard .cardContent {
-
   position: relative;
   padding: 1rem;
   background: var(--RED);
   border-radius: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 .sideBar .sideBarCard .cardContent .helpContent {
   font-size: 1.25rem;
