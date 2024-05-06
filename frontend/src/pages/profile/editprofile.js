@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 
 
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
 
-  const [profilePic, setProfilePic] = useState(decoded.token.user.profilePic || null);
+  const [picturePath, setPicturePath] = useState(decoded.token.user.picturePath || null);
   const [name, setName] = useState(decoded.token.user.username ||'');
   const [age, setAge] = useState(decoded.token.user.age || '');
   const [gender, setGender] = useState(decoded.token.user.gender || '');
@@ -15,9 +16,14 @@ const EditProfile = () => {
 
   const handleInterestClick = (e) => {
     const interest = e.target.textContent;
-    if (interests.includes(interest)) {
+    // Check if the interest already exists in the interests array
+    const isExistingInterest = interests.includes(interest);
+  
+    if (isExistingInterest) {
+      // If the interest exists, remove it from the array
       setInterests(interests.filter(item => item !== interest));
     } else {
+      // If the interest doesn't exist, add it to the array
       setInterests([...interests, interest]);
     }
   };
@@ -31,14 +37,51 @@ const EditProfile = () => {
   };
 
   const handleProfilePicChange = (e) => {
-    const profilePicInput = e.target;
-    const profilePicBase64Input = document.getElementById('profilePicBase64');
-    handleProfilePicChange(profilePicInput, profilePicBase64Input, setProfilePic);
+    const file = e.target.files[0];
+    
+    // Create a FileReader instance
+    const reader = new FileReader();
+  
+    // Listen for the FileReader load event
+    reader.onload = () => {
+      // Update the profile picture preview
+      setPicturePath(reader.result);
+    };
+  
+    // Read the selected file as a data URL
+    reader.readAsDataURL(file);
+  };
+  
+
+  const handleDeleteProfile = async () => {
+    try {
+      const response = await axios.delete('/user/delete', {
+        data: {
+          token: localStorage.getItem('auth'),
+        },
+      });
+      if (response.status === 200) {
+        // Clear the local storage and navigate to the login page
+        localStorage.removeItem('auth');
+        window.location.href = '/login';
+      }
+    } catch (error) {
+      console.error('Error deleting profile:', error);
+    }
   };
 
-  const handleFormSubmit = (e) => {
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
+    const formData = {
+      id: decoded.token.user._id,
+      picturePath: picturePath,
+      username: name,
+      age: age,
+      gender: gender
+    };
+    console.log(formData)
+    const response = await axios.post('/user/saveinfo', formData);
   };
 
   return (
@@ -46,9 +89,9 @@ const EditProfile = () => {
       <form id="profileForm" onSubmit={handleFormSubmit}>
         <h1>Profile Page</h1>
         <div className="profile-pic-container">
-          <img id="profilePicPreview" className="profile-pic" src={profilePic || '#'} alt="Profile Picture Preview" />
+          <img id="profilePicPreview" className="profile-pic" src={picturePath || '#'} alt="Profile Picture Preview" />
           <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
-          <input type="file" id="profilePic" name="profilePic" accept="image/*" onChange={(e) => setProfilePic(e.target.files[0])} />
+          <input type="file" id="profilePic" name="picturePath" accept="image/*" onChange={handleProfilePicChange} />
         </div>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -56,9 +99,10 @@ const EditProfile = () => {
         <input type="number" id="age" name="age" value={age} onChange={(e) => setAge(e.target.value)} required />
         <label htmlFor="gender">Gender:</label>
         <select id="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer Not To Say">Prefer Not To Say</option>
         </select>
         <div className="interests">
           <label>Interests:</label>
@@ -83,6 +127,18 @@ const EditProfile = () => {
           <button className="interestBtn" id="kayakingBtn" onClick={handleInterestClick}>Kayaking</button>
           <button className="interestBtn" id="fishingBtn" onClick={handleInterestClick}>Fishing</button>
         </div>
+        <div className="interests">
+          <label>Interests:</label>
+              {interests.map((interest, index) => (
+                <button
+                  key={index}
+                  className={`interestBtn ${interests.includes(interest) ? 'highlighted' : ''}`}
+                  onClick={handleInterestClick}
+                >
+                {interest}
+                </button>
+              ))}
+        </div>
         <div id="relatedOptions">
           {interests.map((interest, index) => (
             <span key={index}>{interest} </span>
@@ -101,6 +157,8 @@ const EditProfile = () => {
           </div>
         </div>
         <button type="submit" className="upload-btn">Submit</button>
+        <button type="button" className="delete-btn" onClick={handleDeleteProfile}>
+        </button>
       </form>
     </div>
   );

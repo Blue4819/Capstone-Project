@@ -168,47 +168,50 @@ export const googleSignup = async (req, res) => {
 export const saveInfo = async (req, res) => {
   try {
     // Handle file upload
-    upload.single('picture')(req, res, async (err) => {
-      try {
+    upload.single('picturePath')(req, res, async (err) => {
+      if (err) {
         if (err instanceof multer.MulterError) {
           console.error('Multer error:', err);
           return res.status(400).json({ error: 'File upload error' });
-        } else if (err) {
+        } else {
           console.error('Unknown error:', err);
           return res.status(500).json({ error: 'Server error' });
         }
-
-        // Access the uploaded file from req.file
-        const compressedImageBuffer = req.file.buffer;
-        const pictureBase64 = `data:${req.file.mimetype};base64,${compressedImageBuffer.toString('base64')}`;
-        const pictureData = Buffer.from(pictureBase64.split(',')[1], 'base64');
-
-        const saved = await User.updateOne(
-          { _id: req.body.id },
-          {
-            $set: {
-              firstName: req.body.info.firstName,
-              lastName: req.body.info.lastName,
-              email: req.body.info.email,
-              picture: { data: pictureData, contentType: req.file.mimetype },
-              location: req.body.info.location,
-              bio: req.body.info.bio,
-              gender: req.body.info.gender,
-              age: req.body.info.age,
-            },
-          }
-        );
-        res.status(200).json(saved);
-      } catch (error) {
-        console.error('Error saving user info:', error);
-        res.status(500).json({ error: 'Server error' });
       }
+
+      // Access the uploaded file from req.file
+      const pictureData = req.body.picturePath;
+      const mimeType = (pictureData && pictureData.split(';')[0].split(':')[1]) || '';
+
+      // Check if req.body.info exists to prevent errors
+      const info = req.body || {};
+      console.log(info)
+
+      // Update user information
+      const updatedUser = await User.findByIdAndUpdate(
+        req.body.id,
+        {
+          $set: {
+            username: req.body.username || '', // Set a default value for username if not provided
+            picturePath: { data: pictureData, contentType: mimeType },
+            followed_activities: info.activities || [], // Use the 'info' variable to prevent accessing undefined properties
+            followed_locations: info.locations || [], // Use the 'info' variable to prevent accessing undefined properties
+            gender: info.gender || '', // Set a default value for gender if not provided
+            age: info.age || '', // Set a default value for age if not provided
+          },
+        },
+        { new: true }
+      );
+
+      // Return the updated user
+      res.status(200).json(updatedUser);
     });
   } catch (error) {
-    console.error('Error handling file upload:', error);
+    console.error('Error saving user info:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };
+
 
 export const profileInfo = async (req, res) => {
   try {
@@ -241,17 +244,6 @@ export const updateLocation = async (req, res) => {
     const { id } = req.params;
     const { location } = req.body;
     await User.findByIdAndUpdate(id, { location });
-    res.status(200).json({ message: "Location updated successfully." });
-  } catch (error) {
-    res.json({ error });
-  }
-};
-
-export const updateDOB = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { dob } = req.dob;
-    await User.findByIdAndUpdate(id, { dob });
     res.status(200).json({ message: "Location updated successfully." });
   } catch (error) {
     res.json({ error });

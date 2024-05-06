@@ -222,5 +222,14 @@ form input[type="file"] {
 /* CSS */
 .interestBtn:active {
     background-color: yellow;
-    /* Add any other styles to highlight the button */
 }
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
