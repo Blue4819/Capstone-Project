@@ -156,9 +156,10 @@ const EditProfile = () => {
             ))}
           </div>
         </div>
-        <button type="submit" className="upload-btn">Submit</button>
-        <button type="button" className="delete-btn" onClick={handleDeleteProfile}>
-        </button>
+        <div className="button-container">
+          <button type="submit" className="button upload-btn">Submit</button>
+          <button type="button" className="button delete-btn" onClick={handleDeleteProfile}>Delete Account</button>
+        </div>
       </form>
     </div>
   );
