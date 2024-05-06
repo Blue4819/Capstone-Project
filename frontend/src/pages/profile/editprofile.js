@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { jwtDecode } from "jwt-decode";
-
+import Sidebar from '../SideBarSection/sidebar';
 
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
@@ -43,6 +43,7 @@ const EditProfile = () => {
 
   return (
     <div className="container">
+       <Sidebar />
       <form id="profileForm" onSubmit={handleFormSubmit}>
         <h1>Profile Page</h1>
         <div className="profile-pic-container">

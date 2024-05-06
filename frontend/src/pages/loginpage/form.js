@@ -20,7 +20,6 @@ export default function Form({
             setPassword(e.target.value);
         }
     };
-
     const handleGoogleLoginSuccess = (response) => {
         console.log("Google login success:", response);
         const cred = response.credential;
