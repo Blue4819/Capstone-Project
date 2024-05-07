@@ -6,6 +6,7 @@ import EditProfile from "./pages/profile/editprofile.js";
 import NewPosts from "./pages/new posts/newposts.js";
 import PostDetails from "./pages/post/postdetails.js";
 import Profile from "./pages/ViewProfile/profile.js";
+import OtherProfile from "./pages/ViewProfile/otherprofile.js";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/newposts" element={<PrivateRoute><NewPosts /></PrivateRoute>} />
         <Route path="/post/:id" element={<PrivateRoute><PostDetails /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="/profile/:id" element={<PrivateRoute><OtherProfile /></PrivateRoute>} />
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
     </div>

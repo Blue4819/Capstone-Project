@@ -4,7 +4,6 @@ import { config } from 'dotenv';
 import {jwtDecode} from "jwt-decode";
 import bcrypt from "bcrypt";
 import auth from "../middleware/auth.js";
-import axios from 'axios';
 import multer from 'multer';
 
 // Multer configuration for storing files in memory
@@ -221,12 +220,11 @@ export const saveInfo = async (req, res) => {
   }
 };
 
-
 export const profileInfo = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findOne({ _id: id });
-    res.json(user);
+    res.status(200).json(user);
   } catch (error) {
     res.json({ error });
   }
