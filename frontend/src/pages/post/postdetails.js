@@ -126,7 +126,6 @@ const PostDetails = () => {
       </div> {/* Closing tag for <div className='container'> */}
       
       <Modal
-        ref={modalRef} // Add ref to Modal component
         show={showModal}
         onHide={handleCloseModal}
         dialogClassName="custom-modal" // Add custom class name to style the modal
