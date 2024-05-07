@@ -9,10 +9,10 @@ const UserSchema = new Schema({
   email: { type: String, required: true, max: 50, unique: true },
   password: { type: String, required: true, min: 8 },
   picturePath: {data: String, contentType: String},
-  following: [{ type: String}],
-  followers: [{ type: String }],
-  followed_locations: [{ type: Schema.Types.ObjectId, ref: "Location" }],
-  followed_activities: [{ type: Schema.Types.ObjectId, ref: "Activity" }],
+  following: [{ type: Schema.Types.ObjectId, ref: 'User' }], // Referring to the User schema
+  followers: [{ type: Schema.Types.ObjectId, ref: 'User' }], 
+  followed_locations: [{ type: String }], // Array of strings
+  followed_activities: [{ type: String }],
   location: { type: String, default: "" },
   age: { type: Number, default: 0 },
   bio: { type: String, default: "" },

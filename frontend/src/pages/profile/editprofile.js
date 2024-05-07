@@ -12,19 +12,43 @@ const EditProfile = () => {
   const [name, setName] = useState(decoded.token.user.username ||'');
   const [age, setAge] = useState(decoded.token.user.age || '');
   const [gender, setGender] = useState(decoded.token.user.gender || 'Prefer not to say');
-  const [interests, setInterests] = useState(decoded.token.user.interests || []);
-  const [locations, setLocations] = useState(decoded.token.user.locations || []);
+  const [interests, setInterests] = useState(decoded.token.user.followed_activities || []);
+  const [locations, setLocations] = useState(decoded.token.user.followed_locations || []);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  const handleInterestClick = (e) => {
-    const interest = e.target.textContent;
-    // Check if the interest already exists in the interests array
+  const interestsList = [
+    'Adventure Sports',
+    'Cultural Exploration',
+    'Beach Activities',
+    'Wildlife Safari',
+    'Scuba Diving',
+    'Photography',
+    'Food Exploration',
+    'Cycling',
+    'Yoga',
+    'Skiing',
+    'Surfing',
+    'Rafting',
+    'Rock Climbing',
+    'Paragliding',
+    'Bungee Jumping',
+    'Skydiving',
+    'Horseback Riding',
+    'Kayaking',
+    'Fishing',
+  ];
+
+  const handleInterestClick = (e, interest) => {
+    e.preventDefault();
     const isExistingInterest = interests.includes(interest);
-  
+
     if (isExistingInterest) {
-      // If the interest exists, remove it from the array
-      setInterests(interests.filter(item => item !== interest));
+      // If the interest exists in followed_activities, remove it
+      const updatedInterests = interests.filter(item => item !== interest);
+      setInterests(updatedInterests);
     } else {
-      // If the interest doesn't exist, add it to the array
+      // If the interest doesn't exist in followed_activities, add it
       setInterests([...interests, interest]);
     }
   };
@@ -90,15 +114,20 @@ const EditProfile = () => {
       picturePath: picturePath,
       username: name,
       age: age,
-      gender: gender
+      gender: gender,
+      activities: interests,
+      locations: locations,
     };
     const response = await axios.post('/user/saveinfo', formData);
     if(response.status==200)
       {
         const token = response.data
-        console.log(token)
         localStorage.setItem("auth", JSON.stringify({token, isGoogle:true}))
-        console.log(JSON.stringify({token}))
+          // Update the modal message
+          setModalMessage('Details saved successfully!');
+          // Show the modal
+          setModalVisible(true);
+          window.location.href = '/editprofile';  
       }
   };
 
@@ -124,42 +153,26 @@ const EditProfile = () => {
         </select>
         <div className="interests">
           <label>Interests:</label>
-          <button className="interestBtn" id="adventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
-          <button className="interestBtn" id="culturalExplorationBtn" onClick={handleInterestClick}>Cultural Exploration</button>
-          <button className="interestBtn" id="beachActivitiesBtn" onClick={handleInterestClick}>Beach Activities</button>
-          <button className="interestBtn" id="adventureSportsBtn" onClick={handleInterestClick}>Adventure Sports</button>
-          <button className="interestBtn" id="wildlifeSafariBtn" onClick={handleInterestClick}>Wildlife Safari</button>
-          <button className="interestBtn" id="scubaDivingBtn" onClick={handleInterestClick}>Scuba Diving</button>
-          <button className="interestBtn" id="photographyBtn" onClick={handleInterestClick}>Photography</button>
-          <button className="interestBtn" id="foodExplorationBtn" onClick={handleInterestClick}>Food Exploration</button>
-          <button className="interestBtn" id="cyclingBtn" onClick={handleInterestClick}>Cycling</button>
-          <button className="interestBtn" id="yogaBtn" onClick={handleInterestClick}>Yoga</button>
-          <button className="interestBtn" id="skiingBtn" onClick={handleInterestClick}>Skiing</button>
-          <button className="interestBtn" id="surfingBtn" onClick={handleInterestClick}>Surfing</button>
-          <button className="interestBtn" id="raftingBtn" onClick={handleInterestClick}>Rafting</button>
-          <button className="interestBtn" id="rockClimbingBtn" onClick={handleInterestClick}>Rock Climbing</button>
-          <button className="interestBtn" id="paraglidingBtn" onClick={handleInterestClick}>Paragliding</button>
-          <button className="interestBtn" id="bungeeJumpingBtn" onClick={handleInterestClick}>Bungee Jumping</button>
-          <button className="interestBtn" id="skydivingBtn" onClick={handleInterestClick}>Skydiving</button>
-          <button className="interestBtn" id="horsebackRidingBtn" onClick={handleInterestClick}>Horseback Riding</button>
-          <button className="interestBtn" id="kayakingBtn" onClick={handleInterestClick}>Kayaking</button>
-          <button className="interestBtn" id="fishingBtn" onClick={handleInterestClick}>Fishing</button>
+          {interestsList.map((interest, index) => (
+            <button
+              key={index}
+              className={`interestBtn ${interests.includes(interest) ? 'highlighted' : ''}`}
+              onClick={() => handleInterestClick(interest)}
+            >
+              {interest}
+            </button>
+          ))}
         </div>
         <div className="interests">
-          <label>Interests:</label>
-              {interests.map((interest, index) => (
-                <button
-                  key={index}
-                  className={`interestBtn ${interests.includes(interest) ? 'highlighted' : ''}`}
-                  onClick={handleInterestClick}
-                >
-                {interest}
-                </button>
-              ))}
-        </div>
-        <div id="relatedOptions">
+          <label>Chosen Interests:</label>
           {interests.map((interest, index) => (
-            <span key={index}>{interest} </span>
+            <button
+              key={index}
+              className="interestBtn highlighted"
+              onClick={() => handleInterestClick(interest)}
+            >
+              {interest}
+            </button>
           ))}
         </div>
         <div className="locations">
@@ -179,6 +192,15 @@ const EditProfile = () => {
           <button type="button" className="button delete-btn" onClick={handleDeleteProfile}>Delete Account</button>
         </div>
       </form>
+      {/* Modal */}
+      {modalVisible && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setModalVisible(false)}>&times;</span>
+            <p>{modalMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
