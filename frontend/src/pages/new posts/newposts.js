@@ -92,9 +92,11 @@ const NewPosts = () => {
             <img src={imagePreview} alt="Image preview" className="image-preview" />
           )}
         </div>
-        <div className="input-wrapper">
-          <input type="text" id="location" value={location} onChange={handleLocationChange} placeholder="Enter location" />
+        
+        <div className="input-wrapper" id="location">
+          <input type="text" value={location} onChange={handleLocationChange} placeholder="Enter location" />
         </div>
+
         <button onClick={handlePost}>Post</button>
       </div>
     </div>

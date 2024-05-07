@@ -84,7 +84,7 @@ const Top = () => {
 
                     <div className='actions flex'>
                         <button className='likeBtn'>
-                            <BiLike className='icon'/> <span>like</span>
+                            <BiLike className='icon'/> <span></span>
                         </button>
                         <button className='commentBtn' onClick={handleCommentClick}>
                             <GoComment className='icon'/> <span></span>

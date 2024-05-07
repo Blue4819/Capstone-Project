@@ -1,7 +1,32 @@
 /* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root{
+    --PrimaryColor: #fff6ed;
+    --HoverColor: #bdbdbd;
+    --paleGreen: hsl(96,75%,89%);
+    --whiteColor: hsl(0,0%,100%);
+    --blackColor: hwb(0 16% 84%);
+    --textColor: hsl(240,1%,48%);
+    --bgColor: hsl(220, 10%, 94%);
+    --greyText: rgb(211, 211, 211);
+    --inputColor: var(--Green);
+    --RED:#E88073;
+    --Green: #C7D6A1;
+
+/* Font and Typography */
+    --biggestFontSize: 2.5rem;
+    --h1FontSize: 1.5rem;
+    --h2FontSize: 1.25rem;
+    --h3FontSize: 1rem;
+    --normalFontSize: .938rem;
+    --smallFontSize: .813rem;
+    --smallestFontSize: .75rem;
+}
+
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Inter, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f3d9b6; /* Sandy color */
@@ -12,7 +37,9 @@ body {
     overflow-y: auto;
 }
 
+
 .container {
+    background-color: #FFF6ED;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,9 +52,9 @@ body {
 form {
     width: 100%;
     padding: 30px;
-    background-color: rgba(255, 99, 71, 0.6); /* Light red background */
+    background-color: #FFF6ED; /*beige bg */
     border-radius: 20px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3); /* Shadow effect */
+     /* Shadow effect */
     transition: transform 0.3s ease;
     overflow-y: auto;
 }
@@ -39,8 +66,9 @@ form:hover {
 form h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    font-size: var(--biggestFontSize);
+    color: var(--blackColor);
+    font-weight: 900;
 }
 
 .profile-pic-container {
@@ -85,14 +113,16 @@ form label {
     display: block;
     margin-bottom: 10px;
     font-size: 20px;
-    color: #fff; /* White text */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    color: var(--blackColor); /* White text */
+    font-family: Inter, sans-serif;
+    font-weight: 600;
 }
 
 form input[type="text"],
 form input[type="number"],
 form select,
 #gender {
+    font-weight: 600;
     width: calc(100% - 40px);
     padding: 15px;
     margin-bottom: 30px;
@@ -107,7 +137,6 @@ form input[type="file"] {
     display: none;
 }
 
-  
 .interests {
     color: #fff; /* White text */
     margin-bottom: 30px;
@@ -231,7 +260,8 @@ form input[type="file"] {
 
 /* CSS */
 .interestBtn:active {
-    background-color: yellow;
+    background-color: var(--RED);
+    /* Add any other styles to highlight the button */
 }
 
 .delete-btn {

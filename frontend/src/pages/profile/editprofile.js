@@ -3,6 +3,7 @@ import './profile.css';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
+import Sidebar from '../SideBarSection/sidebar';
 
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
@@ -86,13 +87,13 @@ const EditProfile = () => {
 
   return (
     <div className="container">
-      <form id="profileForm" onSubmit={handleFormSubmit}>
-        <h1>Profile Page</h1>
+      <Sidebar/>
         <div className="profile-pic-container">
           <img id="profilePicPreview" className="profile-pic" src={picturePath || '#'} alt="Profile Picture Preview" />
           <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
           <input type="file" id="profilePic" name="picturePath" accept="image/*" onChange={handleProfilePicChange} />
         </div>
+      <form id="profileForm" onSubmit={handleFormSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
         <label htmlFor="age">Age:</label>

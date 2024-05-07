@@ -52,8 +52,8 @@
   font-family: Inter, sans-serif;
   font-size: var(--h3FontSize);
   padding: 0.5rem;
-  color: var(--blackColor);
-  font-weight: 300;
+  color: var(--greyText);
+  font-weight: 500;
 }
 .topSection .cardSection .btn {
   box-shadow: none;
@@ -172,9 +172,8 @@
 }
 
 .rightCard {
-  width: 50%; /* Take up 40% of the space */
-  margin-left: 0; /* aligns left */
-
+  width: 40%; /* Take up 40% of the space */
+  margin: auto; /* Center the card horizontally */
 }
 
 .mediaContent video {
@@ -206,19 +205,4 @@
 .commentsSection {
   margin-top: 1rem; /* Add space between comment button and comments section */
   /* Other styles for comments section */
-}
-
-/* Bootstrap styles for comment input */
-.commentsSection input[type="comment"] {
-  width: 100%; /* Make the width equal to the post details card */
-  padding: .5rem; /* Add padding */
-  border-radius: 5px; /* Rounded corners */
-  border: 1px solid var(--HoverColor); /* Border color */
-  outline: none; /* Remove outline */
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Add transition effect */
-}
-
-.commentsSection input[type="comment"]:focus {
-  border-color: var(--PrimaryColor); /* Change border color on focus */
-  box-shadow: 0 0 0 0 1rem #000d04; 
-}
+}/*# sourceMappingURL=top.css.map */

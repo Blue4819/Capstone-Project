@@ -1,5 +1,7 @@
 import React from 'react';
-import './profile.css'; // Import CSS file
+import './viewprofile.css'; // Import CSS file
+import Sidebar from '../SideBarSection/sidebar';
+
 
 export const Profile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));

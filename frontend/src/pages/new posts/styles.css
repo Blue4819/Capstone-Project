@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,32 +10,34 @@ body {
 
 .container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   padding-top: 20px; /* Add some top padding */
 }
 
 .post-form {
-  width: 75%;
-  background-color: #f5deb3; /* Sand color */
+  width: 100%; 
   padding: 40px 20px;
   border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px; /* Add bottom margin */
 }
 
 .post-form h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  
+  font-size: 40px;
+  margin-top: -150px;
   text-align: center;
+  font-weight: 900;
   color: #333;
+  padding-bottom: 2.5rem;
 }
 
 .input-wrapper {
   margin-bottom: 20px;
+  font-family: Inter, sans-serif;
 }
 
 textarea, input[type="file"] {
+  font-family: Inter, sans-serif;
   width: calc(100% - 22px);
   padding: 12px;
   border: 1px solid #ddd;
@@ -44,14 +47,13 @@ textarea, input[type="file"] {
 }
 
 textarea:focus, input[type="file"]:focus {
-  border-color: #007bff;
+  font-family: Inter, sans-serif;
+  border-color: #fff;
 }
 
 button {
-  display: block;
-  width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #e88073;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -61,7 +63,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #d04738;
 }
 
 .post-container {
@@ -91,7 +93,7 @@ select {
 }
 
 select:focus {
-  border-color: #007bff;
+  border-color: #e88074;
 }
 
 .image-preview {
@@ -100,4 +102,18 @@ select:focus {
   border-radius: 8px;
   margin-top: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-wrapper#location {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-wrapper#location input[type="text"] {
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }

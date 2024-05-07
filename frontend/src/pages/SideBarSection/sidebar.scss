@@ -26,10 +26,10 @@
 
 .sideBar{
     margin-top: auto;
-    background:var(--Green);
+    background: var(--Green);
     box-shadow: 1px 0px 4px var(--greyText);
     gap: 1rem;
-    overflow:auto;
+    overflow-y: auto; /* Change overflow property */
 
     .menulists{
         background-color: var(--Green);
@@ -165,6 +165,7 @@
             }
 
             .btn{
+                background-color: #FFF6ED;
                 position: relative;
                 color: var(--blackColor);
                 z-index: 1000;

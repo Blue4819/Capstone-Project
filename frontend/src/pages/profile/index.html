@@ -8,14 +8,16 @@
 </head>
 <body>
     <div class="container">
+        <input type="hidden" id="profilePicBase64" name="profilePicBase64">
         <form id="profileForm">
             <h1>Profile Page</h1>
+            <br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br><br>
             <div class="profile-pic-container">
-                <img id="profilePicPreview" class="profile-pic" src="#" alt="Profile Picture Preview">
+                <img id="profilePicPreview" class="profile-pic" src="#" alt="Picture Preview">
                 <label for="profilePic" class="upload-btn">Upload Profile Picture</label>
                 <input type="file" id="profilePic" name="profilePic" accept="image/*" required>
             </div>
-            <input type="hidden" id="profilePicBase64" name="profilePicBase64">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="age">Age:</label>
