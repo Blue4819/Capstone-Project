@@ -31,10 +31,6 @@ const Top = () => {
         fetchUserData();
     }, []);
 
-    const handleCommentClick = () => {
-        setShowComments(!showComments);
-    };
-
     return (
         <div className='topSection'>
             <div className='headerSection flex'>
