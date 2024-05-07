@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './viewprofile.css'; // Import CSS file
 
-export const Profile = () => {
+const Profile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`/post/${decoded.token.user._id}`);
+        if (response.data.length > 0) {
+          setPosts(response.data);
+        } else {
+          setPosts([]); // Set posts to an empty array if no posts are returned
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+  
+    fetchPosts();
+  }, [decoded]);
+  
+
   if (!decoded || !decoded.token || !decoded.token.user) {
     // Handle case where decoded data is null or undefined
     return <div>Loading...</div>;
   }
 
-  const picturePath = decoded.token.user.picturePath;
-  const name = decoded.token.user.username;
-  const age = decoded.token.user.age;
-  const gender = decoded.token.user.gender;
-  const interests = decoded.token.user.interests || [];
-  const locations = decoded.token.user.locations || [];
-
+  const { picturePath, username, age, gender, followed_activities, followed_locations } = decoded.token.user;
   let base64String = '';
   if (picturePath && picturePath.data) {
     const placeholder = picturePath.data;
     base64String = placeholder.replace("Binary.createFromBase64('", "").replace("')", "");
-    console.log(base64String)
-  } 
+  }
 
   return (
     <div className="container">
@@ -33,7 +47,7 @@ export const Profile = () => {
       <div className="user-details">
         <div className="detail">
           <label>Name:</label>
-          <span>{name}</span>
+          <span>{username}</span>
         </div>
         <div className="detail">
           <label>Age:</label>
@@ -50,7 +64,7 @@ export const Profile = () => {
       <div className="interests">
         <label>Interests:</label>
         <ul>
-          {interests.map((interest, index) => (
+          {followed_activities && followed_activities.map((interest, index) => (
             <li key={index}>{interest}</li>
           ))}
         </ul>
@@ -61,7 +75,7 @@ export const Profile = () => {
       <div className="locations">
         <label>Visited Places:</label>
         <ul>
-          {locations.map((location, index) => (
+          {followed_locations && followed_locations.map((location, index) => (
             <li key={index}>{location}</li>
           ))}
         </ul>
@@ -70,28 +84,15 @@ export const Profile = () => {
       <hr className="separator" />
 
       <div className="posts-container">
-        {/* Sample posts */}
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 1</p>
+        {posts.map((postItem, index) => (
+          <div className="post" key={index}>
+            <div className="post-details">
+              <p className="post-description">{postItem.caption}</p>
+              <img className="post-image" src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
+              <p className="post-location">{postItem.location}</p>
+            </div>
           </div>
-        </div>
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 2. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 2</p>
-          </div>
-        </div>
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 3. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 3</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

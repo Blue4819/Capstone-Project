@@ -15,7 +15,7 @@ router.post('/delete', deletePost);
 
 router.get('/view/:id', seePost);
 
-router.get('/:userId/posts', getUserPosts);
+router.get('/:id', getUserPosts);
 
 router.patch('/:id/like', likePost);
 

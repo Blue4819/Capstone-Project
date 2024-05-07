@@ -102,9 +102,14 @@ export const deletePost = async (req, res) => {
 
 export const getUserPosts = async(req,res) => {
   try {
-    const { userId } = req.params;
-    const post = await Post.find({ userId });
-    res.status(200).json(post);
+    const ID = req.params.id;
+    const post = await Post.find({ userId: ID });
+    console.log(post);
+    if (post.length > 0) {
+      res.status(200).json(post);
+    } else {
+      res.status(404).json({ message: "No posts found for the user." });
+    }
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

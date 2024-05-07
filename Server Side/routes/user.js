@@ -1,5 +1,5 @@
 import express from 'express';
-import { signup, signin, saveInfo, profileInfo, ownProfileInfo, updateLocation, googleSignIn, googleSignup } from '../controllers/userController.js';
+import { signup, signin, saveInfo, profileInfo, ownProfileInfo, updateLocation, googleSignIn, googleSignup, deleteUser } from '../controllers/userController.js';
 import User from '../models/userModel.js';
 import multer from 'multer';
 // Multer configuration for storing files in memory
@@ -23,5 +23,7 @@ router.get('/:id', profileInfo);
 router.get('/own/:id', ownProfileInfo);
 
 router.post('/update_location', updateLocation);
+
+router.post('/delete', deleteUser);
 
 export default router;

@@ -256,3 +256,16 @@ export const updateLocation = async (req, res) => {
     res.json({ error });
   }
 };
+
+import Post from "../models/postModel.js";
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await User.findByIdAndDelete({_id: id});
+    await Post.deleteMany({ userId: id });
+    res.status(200).json({ message: "User and associated posts deleted successfully." });
+  } catch (error) {
+    res.json({ error });
+  }
+};

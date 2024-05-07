@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
-import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
 import Sidebar from '../SideBarSection/sidebar';
@@ -9,7 +8,7 @@ const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
 
   const [picturePath, setPicturePath] = useState(decoded.token.user.picturePath || '');
-  const [name, setName] = useState(decoded.token.user.username ||'');
+  const [name, setName] = useState(decoded.token.user.username || '');
   const [age, setAge] = useState(decoded.token.user.age || '');
   const [gender, setGender] = useState(decoded.token.user.gender || 'Prefer not to say');
   const [interests, setInterests] = useState(decoded.token.user.followed_activities || []);
@@ -39,55 +38,46 @@ const EditProfile = () => {
     'Fishing',
   ];
 
-  const handleInterestClick = (e, interest) => {
+  const handleInterestClick = (e) => {
     e.preventDefault();
+    const interest = e.target.textContent;
     const isExistingInterest = interests.includes(interest);
 
     if (isExistingInterest) {
-      // If the interest exists in followed_activities, remove it
-      const updatedInterests = interests.filter(item => item !== interest);
-      setInterests(updatedInterests);
+      setInterests(interests.filter(item => item !== interest));
     } else {
-      // If the interest doesn't exist in followed_activities, add it
       setInterests([...interests, interest]);
     }
   };
 
   const handleAddLocation = (e) => {
-    const location = e.target.previousElementSibling.value;
+    const location = e.target.previousElementSibling.value.trim();
     if (location) {
       setLocations([...locations, location]);
       e.target.previousElementSibling.value = '';
     }
   };
 
+  const handleLocationRemove = (location) => {
+    setLocations(locations.filter(item => item !== location));
+  };
+
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
-    
-    // Check if a file was selected
+
     if (file) {
-      // Create a FileReader instance
       const reader = new FileReader();
-    
-      // Listen for the FileReader load event
       reader.onload = () => {
-        // Update the profile picture preview
         setPicturePath(reader.result);
       };
-    
-      // Listen for the FileReader error event
       reader.onerror = (error) => {
         console.error('FileReader error:', error);
       };
-    
-      // Read the selected file as a data URL
       reader.readAsDataURL(file);
     } else {
-      // If no file was selected, reset the profile picture
       setPicturePath('');
     }
   };
-  
 
   const handleDeleteProfile = async () => {
     try {
@@ -97,7 +87,6 @@ const EditProfile = () => {
         },
       });
       if (response.status === 200) {
-        // Clear the local storage and navigate to the login page
         localStorage.removeItem('auth');
         window.location.href = '/login';
       }
@@ -105,7 +94,6 @@ const EditProfile = () => {
       console.error('Error deleting profile:', error);
     }
   };
-
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -119,26 +107,23 @@ const EditProfile = () => {
       locations: locations,
     };
     const response = await axios.post('/user/saveinfo', formData);
-    if(response.status==200)
-      {
-        const token = response.data
-        localStorage.setItem("auth", JSON.stringify({token, isGoogle:true}))
-          // Update the modal message
-          setModalMessage('Details saved successfully!');
-          // Show the modal
-          setModalVisible(true);
-          window.location.href = '/editprofile';  
-      }
+    if (response.status === 200) {
+      const token = response.data;
+      localStorage.setItem('auth', JSON.stringify({ token, isGoogle: true }));
+      setModalMessage('Details saved successfully!');
+      setModalVisible(true);
+      window.location.href = '/editprofile';
+    }
   };
 
   return (
     <div className="container">
-      <Sidebar/>
-        <div className="profile-pic-container">
-          <img id="profilePicPreview" className="profile-pic" src={picturePath.data || '#'} alt="Profile Picture Preview" />
-          <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
-          <input type="file" id="profilePic" name="picturePath" accept="image/*" onChange={handleProfilePicChange} />
-        </div>
+      <Sidebar />
+      <div className="profile-pic-container">
+        <img id="profilePicPreview" className="profile-pic" src={picturePath.data || '#'} alt="Profile Picture Preview" />
+        <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
+        <input type="file" id="profilePic" name="picturePath" accept="image/*" onChange={handleProfilePicChange} />
+      </div>
       <form id="profileForm" onSubmit={handleFormSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -183,7 +168,13 @@ const EditProfile = () => {
           </div>
           <div id="locationsList">
             {locations.map((location, index) => (
-              <span key={index}>{location} </span>
+              <button
+                key={index}
+                className="locationBtn"
+                onClick={() => handleLocationRemove(location)}
+              >
+                {location}
+              </button>
             ))}
           </div>
         </div>

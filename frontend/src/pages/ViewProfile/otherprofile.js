@@ -6,6 +6,7 @@ import './viewprofile.css'; // Import CSS file
 export const OtherProfile = () => {
   const [user, setUser] = useState(null);
   const [base64String, setBase64String] = useState('');
+  const [posts, setPosts] = useState([]); // Initialize posts state
   const { id: paramsId } = useParams();
   const location = useLocation();
   const locationId = location.state?.data;
@@ -17,6 +18,15 @@ export const OtherProfile = () => {
         const response = await axios.get(`/user/${ID}`);
         const userData = response.data;
         setUser(userData);
+        const decoded = JSON.parse(localStorage.getItem('auth'));
+        if(userData._id==decoded.token.user._id)
+            {
+                window.location.href = "/profile";
+            }
+        if(userData._id==null)
+            {
+                window.location.href="/dashboard";
+            }
         if (userData.picturePath && userData.picturePath.data) {
           const placeholder = userData.picturePath.data;
           const base64 = placeholder.replace("Binary.createFromBase64('", "").replace("')", "");
@@ -27,8 +37,18 @@ export const OtherProfile = () => {
       }
     };
 
+    const fetchPosts = async () => {
+      try {
+        const postResponse = await axios.get(`/post/${ID}`);
+        setPosts(postResponse.data); // Update posts state with response data
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
     if (ID) {
       fetchUser();
+      fetchPosts();
     }
   }, [ID]);
 
@@ -80,28 +100,16 @@ export const OtherProfile = () => {
       <hr className="separator" />
 
       <div className="posts-container">
-        {/* Sample posts */}
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 1</p>
+        {posts.map((postItem, index) => (
+          <div className="card mb-4" key={index}>
+            <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
+            <div className="card-body">
+              <h5 className="card-title">{postItem.caption}</h5>
+              <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
+              <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
+            </div>
           </div>
-        </div>
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 2. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 2</p>
-          </div>
-        </div>
-        <div className="post">
-          <div className="post-details">
-            <p className="post-description">Sample post 3. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <img className="post-image" src="index.jpg" alt="Post Image" />
-            <p className="post-location">Location 3</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
