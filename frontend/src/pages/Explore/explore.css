@@ -11,3 +11,18 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  .Main{
+    display: flex;
+    
+  }
+
+  .Sidebar{
+    flex: 0 0 20%;
+    
+  
+  }
+  .right{
+    flex:1;
+    
+  }

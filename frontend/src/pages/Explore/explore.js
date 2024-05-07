@@ -7,12 +7,14 @@ import {
 import 'leaflet/dist/leaflet.css';
 import { statesData } from './data';
 import './explore.css';
-
+import Sidebar from '../SideBarSection/sidebar';
 const center = [26.909658344457462, 75.77385980550453];
 
 const Explore = () => {
   return (
-    <MapContainer
+  <div className='Main'>
+    <div className='Sidebar'><Sidebar/></div>
+    <div className='rigt'><MapContainer
       center={center}
       zoom={10}
       style={{ width: '100vw', height: '100vh' }}
@@ -64,7 +66,8 @@ const Explore = () => {
           />)
         })
       }
-    </MapContainer>
+    </MapContainer></div>
+    </div>
   );
 };
 
