@@ -6,23 +6,22 @@ const Profile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get(`/post/${decoded.token.user._id}`);
-        if (response.data.length > 0) {
-          setPosts(response.data);
-        } else {
-          setPosts([]); // Set posts to an empty array if no posts are returned
-        }
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-  
+  useEffect(() => {  
     fetchPosts();
-  }, [decoded]);
-  
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get(`/post/${decoded.token.user._id}`);
+      if (response.data.length > 0) {
+        setPosts(response.data);
+      } else {
+        setPosts([]); // Set posts to an empty array if no posts are returned
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };  
 
   if (!decoded || !decoded.token || !decoded.token.user) {
     // Handle case where decoded data is null or undefined
