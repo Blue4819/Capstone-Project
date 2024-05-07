@@ -40,17 +40,28 @@ const EditProfile = () => {
   const handleProfilePicChange = (e) => {
     const file = e.target.files[0];
     
-    // Create a FileReader instance
-    const reader = new FileReader();
-  
-    // Listen for the FileReader load event
-    reader.onload = () => {
-      // Update the profile picture preview
-      setPicturePath(reader.result);
-    };
-  
-    // Read the selected file as a data URL
-    reader.readAsDataURL(file);
+    // Check if a file was selected
+    if (file) {
+      // Create a FileReader instance
+      const reader = new FileReader();
+    
+      // Listen for the FileReader load event
+      reader.onload = () => {
+        // Update the profile picture preview
+        setPicturePath(reader.result);
+      };
+    
+      // Listen for the FileReader error event
+      reader.onerror = (error) => {
+        console.error('FileReader error:', error);
+      };
+    
+      // Read the selected file as a data URL
+      reader.readAsDataURL(file);
+    } else {
+      // If no file was selected, reset the profile picture
+      setPicturePath('');
+    }
   };
   
 
@@ -95,7 +106,7 @@ const EditProfile = () => {
     <div className="container">
       <Sidebar/>
         <div className="profile-pic-container">
-          <img id="profilePicPreview" className="profile-pic" src={picturePath || '#'} alt="Profile Picture Preview" />
+          <img id="profilePicPreview" className="profile-pic" src={picturePath.data || '#'} alt="Profile Picture Preview" />
           <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>
           <input type="file" id="profilePic" name="picturePath" accept="image/*" onChange={handleProfilePicChange} />
         </div>

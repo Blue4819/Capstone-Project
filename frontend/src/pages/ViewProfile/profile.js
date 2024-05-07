@@ -1,10 +1,12 @@
 import React from 'react';
 import './viewprofile.css'; // Import CSS file
-import Sidebar from '../SideBarSection/sidebar';
-
 
 export const Profile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
+  if (!decoded || !decoded.token || !decoded.token.user) {
+    // Handle case where decoded data is null or undefined
+    return <div>Loading...</div>;
+  }
 
   const picturePath = decoded.token.user.picturePath;
   const name = decoded.token.user.username;
@@ -17,45 +19,79 @@ export const Profile = () => {
   if (picturePath && picturePath.data) {
     const placeholder = picturePath.data;
     base64String = placeholder.replace("Binary.createFromBase64('", "").replace("')", "");
-  }
+    console.log(base64String)
+  } 
 
   return (
     <div className="container">
-      <h1 id="userName">Profile Page</h1>
+      <h1>User Profile</h1>
+
       <div className="profile-pic-container">
-        <img id="profilePicPreview" className="profile-pic" src={base64String ? `data:${picturePath.type};base64,${base64String}` : '/path/to/default-profile-picture.jpg'} alt="Profile Picture Preview" />
+        <img className="profile-pic" src={base64String} alt="Profile Picture" />
       </div>
+
       <div className="user-details">
         <div className="detail">
-          <label htmlFor="name">Name:</label>
-          <span id="name">{name}</span>
+          <label>Name:</label>
+          <span>{name}</span>
         </div>
         <div className="detail">
-          <label htmlFor="age">Age:</label>
-          <span id="age">{age}</span>
+          <label>Age:</label>
+          <span>{age}</span>
         </div>
         <div className="detail">
-          <label htmlFor="gender">Gender:</label>
-          <span id="gender">{gender}</span>
+          <label>Gender:</label>
+          <span>{gender}</span>
         </div>
       </div>
+
       <hr className="separator" />
+
       <div className="interests">
         <label>Interests:</label>
-        <ul id="interestsList">
+        <ul>
           {interests.map((interest, index) => (
             <li key={index}>{interest}</li>
           ))}
         </ul>
       </div>
+
       <hr className="separator" />
+
       <div className="locations">
-        <label htmlFor="locationInput">Visited Places:</label>
-        <ul id="locationsList">
+        <label>Visited Places:</label>
+        <ul>
           {locations.map((location, index) => (
             <li key={index}>{location}</li>
           ))}
         </ul>
+      </div>
+
+      <hr className="separator" />
+
+      <div className="posts-container">
+        {/* Sample posts */}
+        <div className="post">
+          <div className="post-details">
+            <p className="post-description">Sample post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <img className="post-image" src="index.jpg" alt="Post Image" />
+            <p className="post-location">Location 1</p>
+          </div>
+        </div>
+        <div className="post">
+          <div className="post-details">
+            <p className="post-description">Sample post 2. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <img className="post-image" src="index.jpg" alt="Post Image" />
+            <p className="post-location">Location 2</p>
+          </div>
+        </div>
+        <div className="post">
+          <div className="post-details">
+            <p className="post-description">Sample post 3. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <img className="post-image" src="index.jpg" alt="Post Image" />
+            <p className="post-location">Location 3</p>
+          </div>
+        </div>
       </div>
     </div>
   );
