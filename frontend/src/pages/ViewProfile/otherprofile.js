@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useLocation } from 'react-router-dom';
 import './viewprofile.css'; // Import CSS file
-
+import Sidebar from '../SideBarSection/sidebar';
+ 
 export const OtherProfile = () => {
   const [user, setUser] = useState(null);
   const [base64String, setBase64String] = useState('');
@@ -54,9 +55,12 @@ export const OtherProfile = () => {
   }, [ID]);
 
   return (
-    <div className="container">
+    <div className="vprofile_container">
+    <div className='side'>
+      <Sidebar/>
+    </div>
+    <div className="profilecontainer">
       <h1>User Profile</h1>
-
       <div className="profile-pic-container">
         <img className="profile-pic" src={base64String} alt="Profile Picture" />
       </div>
@@ -113,6 +117,7 @@ export const OtherProfile = () => {
         ))}
       </div>
     </div>
+  </div>
   );
 };
 

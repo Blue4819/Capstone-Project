@@ -131,8 +131,8 @@
 }
 
 .profilePhoto {
-  width: 80px; /* Adjust as needed */
-  height: 80px; /* Adjust as needed */
+  width: 80%; /* Adjust as needed */
+  height: 80%; /* Adjust as needed */
   border-radius: 50%;
   cursor: pointer; /* Add cursor pointer for clickable effect */
 }
@@ -195,16 +195,19 @@
 }
 
 .postDetails {
-  width: 100%; /* Take up full width inside the right card */
+  height: 500px;
+  width: 500px; /* Take up full width inside the right card */
   padding: 1rem;
-  border: 1px solid var(--textColor); /* Border around post details */
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;/* Border around post details */
 }
 
 .actions {
-  display: flex;
-  align-items: center;
+  align-items: flex-end;
+  align-content: center;
   gap: 1rem;
-  margin-top: 1rem; /* Add space between post details and actions */
+  margin-top: 100%; /* Add space between post details and actions */
 }
 
 .commentsSection {

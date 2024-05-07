@@ -201,10 +201,11 @@
 }
 
 .postDetails {
-    width: 100%; /* Take up full width inside the right card */
-    padding: 1rem;
-    border: 1px solid var(--textColor); /* Border around post details */
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
 
 .actions {
     display: flex;
