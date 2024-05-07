@@ -129,7 +129,7 @@ form select,
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: none;
     color: #333;
 }
 
