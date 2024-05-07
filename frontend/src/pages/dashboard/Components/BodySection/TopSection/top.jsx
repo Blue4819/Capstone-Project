@@ -9,6 +9,8 @@ import axios from 'axios';
 const Top = () => {
     const [showComments, setShowComments] = useState(false);
     const [userData, setUserData] = useState(null);
+    const [base64String, setBase64String] = useState('');
+    const [dataType, setDataType] = useState('');
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -16,6 +18,10 @@ const Top = () => {
                 const decoded = JSON.parse(localStorage.getItem('auth'));
                 const response = await axios.get(`/user/own/${decoded.token.user._id}`);
                 setUserData(response.data);
+
+                setDataType(response.picturePath.contentType)
+                const placeholder = response.picturePath.data;
+                setBase64String(placeholder.replace("Binary.createFromBase64('", "").replace("')", ""));
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -46,7 +52,7 @@ const Top = () => {
                             <center>
                                 {userData && (
                                     <>
-                                        <img src={userData.picturePath} alt="Profile" className="profilePhoto"/>
+                                        <img src={`data:${dataType};base64,${base64String}`} alt="Image" />
                                         <div className='profileInfo'>
                                             <a href="/profile" className="username">{userData.username}</a>
                                             <p className='location'>{userData.location}</p>
