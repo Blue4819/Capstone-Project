@@ -22,7 +22,7 @@ const PostDetails = () => {
   const [base64String, setBase64String] = useState('');
   const [isOwner, setIsOwner] = useState(false); // State to track if current user is owner of post
   const [showModal, setShowModal] = useState(false); // State to track if modal is shown or hidden
-  const modalRef = React.useRef(null); // Add ref to Modal component
+  const [isLiked, setIsLiked] = useState(false); // State to track if the post is liked by the current user
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -37,6 +37,9 @@ const PostDetails = () => {
         // Check if current user is owner of the post
         const decoded = JSON.parse(localStorage.getItem('auth'));
         setIsOwner(data.userId === decoded.token.user._id);
+
+        // Check if the post is liked by the current user
+        setIsLiked(data.likes.includes(decoded.token.user._id));
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -53,16 +56,22 @@ const PostDetails = () => {
     console.log('Edit post');
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     // Handle delete functionality
     const res1 = await axios.post('/post/delete', ID);
-    navigate("/dashboard")
+    navigate("/dashboard");
     console.log('Delete post');
   };
 
-  const handleLike = () => {
-    // Handle like functionality
-    console.log('Like post');
+  const handleLike = async () => {
+    try {
+      // Toggle like status of the post
+      const response = await axios.put(`/post/like/${ID}`);
+      setPost(response.data);
+      setIsLiked(!isLiked); // Update like status in the UI
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
   };
 
   const handleComment = () => {
@@ -105,7 +114,8 @@ const PostDetails = () => {
                   </div>
                 ) : ( // If not owner, show like and comment buttons
                   <div>
-                    <button onClick={handleLike}>Like</button>
+                    {/* Show like button and handle like functionality */}
+                    <button onClick={handleLike}>{isLiked ? 'Unlike' : 'Like'}</button>
                     <button onClick={handleComment}>Comment</button>
                   </div>
                 )}
