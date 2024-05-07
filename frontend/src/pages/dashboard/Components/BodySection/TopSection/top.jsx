@@ -11,6 +11,7 @@ const Top = () => {
     const [userData, setUserData] = useState(null);
     const [base64String, setBase64String] = useState('');
     const [dataType, setDataType] = useState('');
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -22,6 +23,7 @@ const Top = () => {
                 setDataType(response.picturePath.contentType)
                 const placeholder = response.picturePath.data;
                 setBase64String(placeholder.replace("Binary.createFromBase64('", "").replace("')", ""));
+                setPosts(response.data.posts);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -74,38 +76,32 @@ const Top = () => {
                             <>
                                 <a href="/profile" className="username">{userData.posts[0].username}</a>
                                 <p className="caption">{userData.posts[0].caption}</p>
-                                <div className='mediaContent'>
-                                    {/* Conditionally render video or image */}
-                                    {userData.posts[0].mediaType === 'video' ? (
-                                        <video src={userData.posts[0].media} autoPlay loop muted></video>
-                                    ) : (
-                                        <img src={userData.posts[0].media} alt='post'/>
-                                    )}
+                                <div className='posts-container'>
+                                    {posts.map((postItem, index) => (
+                                        <div className="card mb-4" key={index}>
+                                            <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" className='profilephoto' />
+                                            <div className="card-body">
+                                                <h5 className="card-title">{postItem.caption}</h5>
+                                                <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
+                                                <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </>
                         )}
                         {/* Border around post details */}
                         <div className="postBorder"></div>
-                    </div>
 
-                    <div className='actions flex'>
-                        <button className='likeBtn'>
-                            <BiLike className='icon'/> <span></span>
-                        </button>
-                        <button className='commentBtn' onClick={handleCommentClick}>
-                            <GoComment className='icon'/> <span></span>
-                        </button>
-                        <button className='sendBtn'>
-                            <FiSend className='icon'/> 
-                        </button>
-                    </div>
-                    {/* Comment section */}
-                    {showComments && (
-                        <div className="commentsSection">
-                            {/* Comments content */}
-                            <input type='comment' placeholder='Comments go here'/>
+                        <div className='actions flex'>
+                            <button className='likeBtn'>
+                                <BiLike className='icon'/> <span></span>
+                            </button>
+                            <button className='sendBtn'>
+                                <FiSend className='icon'/> 
+                            </button>
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
         </div>
