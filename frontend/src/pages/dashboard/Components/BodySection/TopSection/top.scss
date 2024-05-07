@@ -204,6 +204,7 @@
     border: 2px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
+
 }
 
 
@@ -212,9 +213,4 @@
     align-items: center;
     gap: 1rem;
     margin-top: 1rem; /* Add space between post details and actions */
-}
-
-.commentsSection {
-    margin-top: 1rem; /* Add space between comment button and comments section */
-    /* Other styles for comments section */
 }
