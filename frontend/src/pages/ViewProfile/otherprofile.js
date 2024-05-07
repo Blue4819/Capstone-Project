@@ -34,6 +34,7 @@ export const OtherProfile = () => {
         }
       } catch (error) {
         console.error('Error fetching user:', error);
+        window.location.href="/dashboard";
       }
     };
 
