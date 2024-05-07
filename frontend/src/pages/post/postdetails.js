@@ -101,8 +101,8 @@ const PostDetails = () => {
 
   return (
     <div className="edit-postcontainer">
-      <Sidebar className="sidebar" />
       <div className='container'>
+      <Sidebar className="sidebar" />
         <div className="container py-5">
           <h1 className="mb-4">Post Details</h1>
           {loading && <div>Loading...</div>}
