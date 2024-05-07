@@ -23,11 +23,15 @@ const PostDetails = () => {
   const [isOwner, setIsOwner] = useState(false); // State to track if current user is owner of post
   const [showModal, setShowModal] = useState(false); // State to track if modal is shown or hidden
   const [isLiked, setIsLiked] = useState(false); // State to track if the post is liked by the current user
+  const [likeCount, setLikeCount] = useState(0);
+
+  const decoded = JSON.parse(localStorage.getItem('auth'));
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/post/view/${ID}`);
+        const uid = decoded.token.user._id;
+        const response = await axios.get(`/post/view/${ID}`, uid);
         const { data } = response;
         setPost(data);
         setLoading(false);
@@ -35,21 +39,24 @@ const PostDetails = () => {
         setBase64String(placeholder.replace("Binary.createFromBase64('", "").replace("')", ""));
         
         // Check if current user is owner of the post
-        const decoded = JSON.parse(localStorage.getItem('auth'));
         setIsOwner(data.userId === decoded.token.user._id);
-
+  
         // Check if the post is liked by the current user
-        setIsLiked(data.likes.includes(decoded.token.user._id));
+        if (data.likes && decoded.token.user._id) {
+          setIsLiked(data.likes.includes(decoded.token.user._id));
+        }
+
+        setLikeCount(data.likes ? data.likes.size : 0);
       } catch (error) {
         setError(error.message);
         setLoading(false);
       }
     };
-
+  
     if (ID) {
       fetchPost();
     }
-  }, [ID]);
+    }, [ID]);
 
   const handleEdit = () => {
     handleShowModal();
@@ -66,7 +73,7 @@ const PostDetails = () => {
   const handleLike = async () => {
     try {
       // Toggle like status of the post
-      const response = await axios.put(`/post/like/${ID}`);
+      const response = await axios.patch(`/post/like/${ID}`, decoded.token.user._id);
       setPost(response.data);
       setIsLiked(!isLiked); // Update like status in the UI
     } catch (error) {
@@ -154,6 +161,13 @@ const PostDetails = () => {
                 ))}
               </select>
             </div>
+            {!isOwner && ( // If not owner, show like and comment buttons
+          <div>
+            {/* Show like button and handle like functionality */}
+          <button onClick={handleLike}>{isLiked ? 'Unlike' : 'Like'}</button>
+          <button onClick={handleComment}>Comment</button>
+          </div>
+          )}
           </form>
         </Modal.Body>
         <Modal.Footer>

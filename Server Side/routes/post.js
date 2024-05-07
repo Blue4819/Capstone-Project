@@ -17,7 +17,7 @@ router.get('/view/:id', seePost);
 
 router.get('/:id', getUserPosts);
 
-router.patch('/:id/like', likePost);
+router.patch('/like/:id', likePost);
 
 router.post('/:id/comments', addComment);
 
