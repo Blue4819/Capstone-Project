@@ -40,10 +40,11 @@ const PostDetails = () => {
         
         // Check if current user is owner of the post
         setIsOwner(data.userId === decoded.token.user._id);
-  
+
+        console.log(typeof(data.likes))  
         // Check if the post is liked by the current user
         if (data.likes && decoded.token.user._id) {
-          setIsLiked(data.likes.includes(decoded.token.user._id));
+          setIsLiked(data.likes[decoded.token.user._id]);
         }
 
         setLikeCount(data.likes ? data.likes.size : 0);
@@ -73,7 +74,7 @@ const PostDetails = () => {
   const handleLike = async () => {
     try {
       // Toggle like status of the post
-      const response = await axios.patch(`/post/like/${ID}`, decoded.token.user._id);
+      const response = await axios.patch(`/post/like/${ID}`, {uid: decoded.token.user._id});
       setPost(response.data);
       setIsLiked(!isLiked); // Update like status in the UI
     } catch (error) {

@@ -142,7 +142,7 @@ const EditProfile = () => {
             <button
               key={index}
               className={`interestBtn ${interests.includes(interest) ? 'highlighted' : ''}`}
-              onClick={() => handleInterestClick(interest)}
+              onClick={handleInterestClick}
             >
               {interest}
             </button>
@@ -154,7 +154,7 @@ const EditProfile = () => {
             <button
               key={index}
               className="interestBtn highlighted"
-              onClick={() => handleInterestClick(interest)}
+              onClick={handleInterestClick}
             >
               {interest}
             </button>
