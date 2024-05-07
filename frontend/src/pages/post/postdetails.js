@@ -22,12 +22,16 @@ const PostDetails = () => {
   const [base64String, setBase64String] = useState('');
   const [isOwner, setIsOwner] = useState(false); // State to track if current user is owner of post
   const [showModal, setShowModal] = useState(false); // State to track if modal is shown or hidden
-  const modalRef = React.useRef(null); // Add ref to Modal component
+  const [isLiked, setIsLiked] = useState(false); // State to track if the post is liked by the current user
+  const [likeCount, setLikeCount] = useState(0);
+
+  const decoded = JSON.parse(localStorage.getItem('auth'));
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/post/view/${ID}`);
+        const uid = decoded.token.user._id;
+        const response = await axios.get(`/post/view/${ID}`, uid);
         const { data } = response;
         setPost(data);
         setLoading(false);
@@ -35,34 +39,46 @@ const PostDetails = () => {
         setBase64String(placeholder.replace("Binary.createFromBase64('", "").replace("')", ""));
         
         // Check if current user is owner of the post
-        const decoded = JSON.parse(localStorage.getItem('auth'));
         setIsOwner(data.userId === decoded.token.user._id);
+  
+        // Check if the post is liked by the current user
+        if (data.likes && decoded.token.user._id) {
+          setIsLiked(data.likes.includes(decoded.token.user._id));
+        }
+
+        setLikeCount(data.likes ? data.likes.size : 0);
       } catch (error) {
         setError(error.message);
         setLoading(false);
       }
     };
-
+  
     if (ID) {
       fetchPost();
     }
-  }, [ID]);
+    }, [ID]);
 
   const handleEdit = () => {
     handleShowModal();
     console.log('Edit post');
   };
 
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     // Handle delete functionality
     const res1 = await axios.post('/post/delete', ID);
-    navigate("/dashboard")
+    navigate("/dashboard");
     console.log('Delete post');
   };
 
-  const handleLike = () => {
-    // Handle like functionality
-    console.log('Like post');
+  const handleLike = async () => {
+    try {
+      // Toggle like status of the post
+      const response = await axios.patch(`/post/like/${ID}`, decoded.token.user._id);
+      setPost(response.data);
+      setIsLiked(!isLiked); // Update like status in the UI
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
   };
 
   const handleComment = () => {
@@ -105,7 +121,8 @@ const PostDetails = () => {
                   </div>
                 ) : ( // If not owner, show like and comment buttons
                   <div>
-                    <button onClick={handleLike}>Like</button>
+                    {/* Show like button and handle like functionality */}
+                    <button onClick={handleLike}>{isLiked ? 'Unlike' : 'Like'}</button>
                     <button onClick={handleComment}>Comment</button>
                   </div>
                 )}
@@ -116,7 +133,6 @@ const PostDetails = () => {
       </div> {/* Closing tag for <div className='container'> */}
       
       <Modal
-        ref={modalRef} // Add ref to Modal component
         show={showModal}
         onHide={handleCloseModal}
         dialogClassName="custom-modal" // Add custom class name to style the modal
@@ -145,6 +161,13 @@ const PostDetails = () => {
                 ))}
               </select>
             </div>
+            {!isOwner && ( // If not owner, show like and comment buttons
+          <div>
+            {/* Show like button and handle like functionality */}
+          <button onClick={handleLike}>{isLiked ? 'Unlike' : 'Like'}</button>
+          <button onClick={handleComment}>Comment</button>
+          </div>
+          )}
           </form>
         </Modal.Body>
         <Modal.Footer>

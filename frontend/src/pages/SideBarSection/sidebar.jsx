@@ -69,7 +69,7 @@ const Sidebar = () => {
                     </li>
 
                     <li className="listitems">
-                        <a href="#" className='menuLink'>
+                        <a href="/explore" className='menuLink'>
                             <MdOutlineExplore className="icon"/>
                             <span className="smalltext"></span>
                             Explore
