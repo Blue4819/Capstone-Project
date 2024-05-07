@@ -6,10 +6,8 @@ import Body from './Components/BodySection/Body';
 const Dashboard = () => {
     return (
         <div className='dashboard-container'>
-            <div className='sidebar'>
-                <Sidebar/>
-            </div>
             <div className='container'>
+                <Sidebar/>
                 <Body/>
             </div>
         </div>

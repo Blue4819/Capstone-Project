@@ -68,6 +68,7 @@
 }
 
 .headerSection {
+  padding-top: 2rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -84,7 +85,8 @@
 }
 
 .title p {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  position:relative;
   color: var(--textColor);
   font-weight: 400;
   font-family: "Inter", sans-serif;
@@ -99,13 +101,16 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px var(--inputColor);
   background-color: var(--whiteColor);
+  width: 35%; /* Set the width to 100% */
 }
 
 .searchBar input {
   border: none;
   outline: none;
   background: none;
+  width: 100%; /* Ensure input takes up full width */
 }
+
 
 .icon {
   color: var(--blackColor);
@@ -172,7 +177,7 @@
 }
 
 .rightCard {
-  width: 40%; /* Take up 40% of the space */
+  width: 50%; /* Take up 40% of the space */
   margin: auto; /* Center the card horizontally */
 }
 

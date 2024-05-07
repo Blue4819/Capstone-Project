@@ -88,18 +88,6 @@ body{
     padding: 1rem ;
 }
 
-.dashboard-container{
-    position: relative;
-    width: 95vw;
-    height: 95vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFF6ED;
-    overflow: hidden;
-    border-radius: 1rem;
-    box-shadow: 2px 2px 8px var(--greyText);
-}
 
 .container{
     position: relative;
