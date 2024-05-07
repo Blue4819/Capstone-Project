@@ -180,12 +180,14 @@ export const saveInfo = async (req, res) => {
       }
 
       // Access the uploaded file from req.file
-      const pictureData = req.body.picturePath;
-      const mimeType = (pictureData && pictureData.split(';')[0].split(':')[1]) || '';
+      const pictureData = req.body.picturePath && typeof req.body.picturePath === 'string'
+      ? req.body.picturePath : '';
+
+    // Access the uploaded file from req.file
+    const mimeType = (pictureData && pictureData.split(';')[0].split(':')[1]) || '';
 
       // Check if req.body.info exists to prevent errors
       const info = req.body || {};
-      console.log(info)
 
       // Update user information
       const updatedUser = await User.findByIdAndUpdate(
@@ -202,9 +204,16 @@ export const saveInfo = async (req, res) => {
         },
         { new: true }
       );
-
+      const user = await User.findOne({_id :req.body.id})
+      
+      const token = jwt.sign(
+        { userId: req.body._id },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
       // Return the updated user
-      res.status(200).json(updatedUser);
+      console.log(user)
+      res.status(200).json({user: user, token});
     });
   } catch (error) {
     console.error('Error saving user info:', error);

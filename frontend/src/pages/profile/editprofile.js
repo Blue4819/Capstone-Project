@@ -8,10 +8,10 @@ import Sidebar from '../SideBarSection/sidebar';
 const EditProfile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
 
-  const [picturePath, setPicturePath] = useState(decoded.token.user.picturePath || null);
+  const [picturePath, setPicturePath] = useState(decoded.token.user.picturePath || '');
   const [name, setName] = useState(decoded.token.user.username ||'');
   const [age, setAge] = useState(decoded.token.user.age || '');
-  const [gender, setGender] = useState(decoded.token.user.gender || '');
+  const [gender, setGender] = useState(decoded.token.user.gender || 'Prefer not to say');
   const [interests, setInterests] = useState(decoded.token.user.interests || []);
   const [locations, setLocations] = useState(decoded.token.user.locations || []);
 
@@ -81,8 +81,14 @@ const EditProfile = () => {
       age: age,
       gender: gender
     };
-    console.log(formData)
     const response = await axios.post('/user/saveinfo', formData);
+    if(response.status==200)
+      {
+        const token = response.data
+        console.log(token)
+        localStorage.setItem("auth", JSON.stringify({token, isGoogle:true}))
+        console.log(JSON.stringify({token}))
+      }
   };
 
   return (
