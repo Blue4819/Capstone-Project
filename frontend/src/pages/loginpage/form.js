@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
+
 export default function Form({
     setUser,
     setAuthState,
@@ -44,7 +45,7 @@ export default function Form({
     };
 
     return (
-        <form className='bg-[#C7D6A1] mt-30 px-50 py-20 rounded-3xl border-2 border-gray 200'>
+        <form className='bg-[#C7D6A1] mt-16 px-50 py-20 rounded-3xl border-2 border-gray 200'>
             <h1 className='text-5xl font-semibold'><center><bold>Welcome!</bold></center></h1>
             <p className='font-medium text-lg text-black-500 mt-4'>Enter your email and password to access your account</p>
             <div className='mt-8'>

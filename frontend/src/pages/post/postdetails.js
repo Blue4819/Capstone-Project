@@ -173,7 +173,7 @@ const PostDetails = () => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" className='close' label='x' onClick={handleCloseButtonClick}>
+          <Button variant="secondary" className='close' onClick={handleCloseButtonClick}>
             Close
           </Button>
           <Button variant="primary" onClick={handleCloseButtonClick}>

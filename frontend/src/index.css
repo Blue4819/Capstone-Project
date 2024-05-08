@@ -17,8 +17,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-@media (min-width: 1024px) {
-  .lg\:w-1\/2 {
-  }
-}
