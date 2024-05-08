@@ -115,7 +115,6 @@
   top: -8px;
   right: 50%;
   transform: translate(50%);
-  z-index: 100;
 }
 .sideBar .sideBarCard .cardContent {
   position: relative;
@@ -143,7 +142,6 @@
   background-color: #FFF6ED;
   position: relative;
   color: var(--blackColor);
-  z-index: 1000;
 }
 .sideBar .sideBarCard .cardContent .circle1, .sideBar .sideBarCard .cardContent .circle2 {
   position: relative;
