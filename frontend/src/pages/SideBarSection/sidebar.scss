@@ -137,7 +137,6 @@
             top: -8px;
             right: 50%;
             transform: translate(50%);
-            z-index: 100;
         }
 
         .cardContent{
@@ -168,7 +167,7 @@
                 background-color: #FFF6ED;
                 position: relative;
                 color: var(--blackColor);
-                z-index: 1000;
+                
             }
 
             .circle1, .circle2{
