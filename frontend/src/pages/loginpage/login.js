@@ -8,7 +8,7 @@ const LoginPage = () => {
   return (
     <div>
       {/* Header */}
-      <header className="bg-[#EBDFCE] py-4 px-9 flex items-center justify-between rounded-full">
+      <header className="bg-[#EBDFCE] py-6 px-12 flex items-center justify-between rounded-full">
         {/* Logo */}
         <img src={logoImage} alt="Holidate" className="h-20 rounded-xl mr-4" />
         {/* Navigation */}
