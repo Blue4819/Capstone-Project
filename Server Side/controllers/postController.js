@@ -115,6 +115,20 @@ export const getUserPosts = async(req,res) => {
   }
 }
 
+export const dashboard = async(req, res) => {
+  try {
+    console.log('yes it works')
+    const posts = await Post.find().sort({ createdAt: -1 });
+    if (posts.length > 0) {
+      res.status(200).json(posts);
+    } else {
+      res.status(404).json({ message: "No posts found." });
+    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 export const likePost = async(req,res) => {
   try {
     const id = req.params.id;

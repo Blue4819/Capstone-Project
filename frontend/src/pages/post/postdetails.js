@@ -43,7 +43,7 @@ const PostDetails = () => {
   
         // Check if the post is liked by the current user
         if (data.likes && decoded.token.user._id) {
-          setIsLiked(data.likes.includes(decoded.token.user._id));
+          setIsLiked(data.likes[decoded.token.user._id]);
         }
 
         setLikeCount(data.likes ? data.likes.size : 0);

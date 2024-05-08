@@ -236,7 +236,6 @@ export const ownProfileInfo = async (req, res) => {
     console.log(id)
 
     const user = await User.findOne({ _id: id });
-    console.log(user)
 
     res.status(200).json(user);
   } catch (error) {
