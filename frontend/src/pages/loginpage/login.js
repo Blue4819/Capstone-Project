@@ -8,14 +8,18 @@ const LoginPage = () => {
   return (
     <div>
       {/* Header */}
-      <header className="bg-[#EBDFCE] py-6 px-12 flex items-center justify-between rounded-full">
+      <div>
+      <header className="bg-[#EBDFCE] py-4 px-9 flex items-center justify-between rounded-full">
         {/* Logo */}
-        <img src={logoImage} alt="Holidate" className="h-20 rounded-xl mr-4" />
+        <a href="/" className="flex items-center">
+        <img src={logoImage} alt="Holidate" className="h-20 w-50 rounded-l" />
+        </a>
         {/* Navigation */}
         <nav className="flex items-center text-semi-bold text-lg">
           <a href="/signup" className="hover:underline">Sign Up!</a>
         </nav>
       </header>
+      </div>
       {/* Main Content */}
       <div className="flex w-full h-screen">
         <div className="w-1/2 bg-[#FFF6ED] rounded-lg p-4 mt-8">
