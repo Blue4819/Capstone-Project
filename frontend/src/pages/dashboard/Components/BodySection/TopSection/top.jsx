@@ -77,15 +77,20 @@ const Top = () => {
                                 <a href="/profile" className="username">{userData.posts[0].username}</a>
                                 <p className="caption">{userData.posts[0].caption}</p>
                                 <div className='posts-container'>
-                                    {posts.map((postItem, index) => (
-                                        <div className="card mb-4" key={index}>
-                                            <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
-                                            <div className="card-body">
-                                                <h5 className="card-title">{postItem.caption}</h5>
-                                                <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
-                                                <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
-                                            </div>
-                                        </div>
+                                {posts.map((postItem, index) => (
+                                    <div class="cardmb-4" className="box" key={postItem._id}>
+                                    <p classname="card-username">
+                                        <a href={`/profile/${postItem.userId}`}>{postItem.userId}
+                                    </a></p>
+                                    <a href={`/post/${postItem._id}`}>
+                                    <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image"  className='image'/>
+                                    <div className="card-body">
+                                    <h5 className="card-title">{postItem.caption}</h5>
+                                    <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
+                                    <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
+                                    </div>
+                                    </a>
+                                    </div>
                                     ))}
                                 </div>
                             </>

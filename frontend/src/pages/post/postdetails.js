@@ -17,9 +17,41 @@ const PostDetails = ({ postId }) => {
     fetchPost();
   }, [postId]);
 
-  if (!post) {
-    return <div>Loading...</div>;
-  }
+  const handleDelete = async () => {
+    // Handle delete functionality
+    const res1 = await axios.post('/post/delete', ID);
+    navigate("/dashboard");
+    console.log('Delete post');
+  };
+
+  const handleLike = async () => {
+    try {
+      // Toggle like status of the post
+      const response = await axios.patch(`/post/like/${ID}`, {uid: decoded.token.user._id});
+      setPost(response.data);
+      setIsLiked(!isLiked); // Update like status in the UI
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
+  };
+
+  const handleComment = () => {
+    // Handle comment functionality
+    console.log('Comment on post');
+  };
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // Call handleClose method on modalRef when close button is clicked
+  const handleCloseButtonClick = () => {
+    handleCloseModal();
+  };
 
   return (
     <div>

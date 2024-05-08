@@ -55,6 +55,10 @@ export const OtherProfile = () => {
   }, [ID]);
 
   return (
+    <div className='Main'>
+    <div className='side'>
+      <Sidebar />
+    </div>
     <div className="vprofile_container">
     <div className='side'>
       <Sidebar/>
@@ -102,22 +106,44 @@ export const OtherProfile = () => {
         </ul>
       </div>
 
-      <hr className="separator" />
+          <hr className="separator" />
 
-      <div className="posts-container">
-        {posts.map((postItem, index) => (
-          <div className="card mb-4" key={index}>
-            <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
-            <div className="card-body">
-              <h5 className="card-title">{postItem.caption}</h5>
-              <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
-              <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
-            </div>
+          <div className="interests">
+            <label>Interests:</label>
+            <ul>
+              {user && user.interests && user.interests.map((interest, index) => (
+                <li key={index}>{interest}</li>
+              ))}
+            </ul>
           </div>
-        ))}
+
+          <hr className="separator" />
+
+          <div className="locations">
+            <label>Visited Places:</label>
+            <ul>
+              {user && user.locations && user.locations.map((location, index) => (
+                <li key={index}>{location}</li>
+              ))}
+            </ul>
+          </div>
+
+          <hr className="separator" />
+
+          <div className="posts-container">
+            {posts.map((postItem, index) => (
+              <div className="card mb-4" key={index}>
+                <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
+                <div className="card-body">
+                  <h5 className="card-title">{postItem.caption}</h5>
+                  <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
+                  <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div></div>
       </div>
-    </div>
-  </div>
   );
 };
 

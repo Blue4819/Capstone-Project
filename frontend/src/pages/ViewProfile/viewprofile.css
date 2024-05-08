@@ -30,11 +30,13 @@ body {
     font-family: 'Inter', sans-serif; /* Updated font */
     background-color: var(--bgColor); /* Updated background color */
 }
-
+.Main{
+    display:flex;
+}
 .vprofile_container {
     display: flex;
     width: 90%;
-    height: 60%;
+    height: 160vh;
     margin: 0 auto;
     padding: none;
     background-color: var(--PrimaryColor); /* Updated background color */
