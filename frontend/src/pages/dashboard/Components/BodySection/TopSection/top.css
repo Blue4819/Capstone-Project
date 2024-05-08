@@ -139,7 +139,7 @@
   font-family: Inter, sans-serif;
   font-weight: 500;
   font-size: 1rem;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   text-align: center;
   color: var(--blackColor);
   cursor: pointer; /* Add cursor pointer for clickable effect */
@@ -223,3 +223,13 @@
 .image{
   height: 300px;
 }
+
+.cardSection .box .card-username {
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: black;
+  cursor: pointer;
+}
+
