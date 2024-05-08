@@ -1,0 +1,25 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root{
+    --PrimaryColor: #fff6ed;
+    --HoverColor: #bdbdbd;
+    --paleGreen: hsl(96,75%,89%);
+    --whiteColor: hsl(0,0%,100%);
+    --blackColor: hwb(0 16% 84%);
+    --textColor: hsl(240,1%,48%);
+    --bgColor: hsl(220, 10%, 94%);
+    --greyText: rgb(211, 211, 211);
+    --inputColor: var(--Green);
+    --RED:#E88073;
+    --Green: #C7D6A1;
+
+/* Font and Typography */
+    --biggestFontSize: 2.5rem;
+    --h1FontSize: 1.5rem;
+    --h2FontSize: 1.25rem;
+    --h3FontSize: 1rem;
+    --normalFontSize: .938rem;
+    --smallFontSize: .813rem;
+    --smallestFontSize: .75rem;
+}

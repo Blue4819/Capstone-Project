@@ -10,7 +10,7 @@ const LoginPage = () => {
   return (
     <div>
       {/* Header */}
-      <header className="bg-[#EBDFCE] py-4 px-9 flex items-center justify-between rounded-full">
+      <header className="bg-[#EBDFCE] py-6 px-12 flex items-center justify-between rounded-full">
         {/* Logo */}
         <img src={logoImage} alt="Holidate" className="h-20 rounded-xl" />
         {/* Navigation */}
@@ -21,10 +21,10 @@ const LoginPage = () => {
       {/* Main Content */}
       <div className="flex w-full h-screen">
         <div></div>
-        <div className="w-full flex items-center justify-center lg:w-1/2">
+        <div className="w-full flex items-center justify-center lg:w-5/4 ">
           <Form />
         </div>
-        <div className="hidden relative lg:flex flex-col justify-center items-center w-1/2 bg-[#FFF6ED] rounded-lg p-4">
+        <div className="hidden relative lg:flex flex-col justify-center items-center w-3/4 bg-[#FFF6ED] rounded-lg p-4">
           {/* Text Content */}
           <h1 className="text-4xl text-gray-800 mb-4">Connect to new people and places!</h1>
           {/* Image Grid */}
