@@ -65,12 +65,19 @@
 }
 
 .card-text {
+  font-family:Inter, sans-serif;
   font-size: var(--normalFontSize);
   margin-bottom: 1rem;
 }
 
+.buttonss{
+  padding: 1% 1%;
+}
 .card-text strong {
+  font-size: var(--h2FontSize);
+  font-family:Inter, sans-serif;
   font-weight: 600;
+
 }
 
 .modal {
@@ -120,4 +127,10 @@
 
 .btn-primary {
   margin-left: 1rem;
+}
+
+.card-body p{
+  font-size: var(--h3FontSize);
+  font-family: Inter,sans-serif;
+  font-weight: 400;
 }

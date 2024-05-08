@@ -1,13 +1,46 @@
+:root {
+    --PrimaryColor: #ffefe3;
+    --HoverColor: #bdbdbd;
+    --paleGreen: hsl(96,75%,89%);
+    --whiteColor: hsl(0,0%,100%);
+    --blackColor: hsl(0, 100%, 3%);
+    --textColor: hsl(240, 1%, 35%);
+    --bgColor: #fff4db;
+    --greyText: rgb(190,190,190);
+    --Green: #C7D6A1;
+    --RED:#E88073;
+    --inputColor: var(--Green);
+    /* Font and Typography */
+    --biggestFontSize: 2.5rem;
+    --h1FontSize: 1.5rem;
+    --h2FontSize: 1.25rem;
+    --h3FontSize: 1rem;
+    --normalFontSize: .938rem;
+    --smallFontSize: .813rem;
+    --smallestFontSize: .75rem;
+  }
+
 .mainContent{
     width: 90%;
     height: 100%;
     padding: 1rem;
     overflow: auto;
-
-
     .bottom{
-        margin-top: 2rem;
-        gap: 2rem;
-        align-items: flex-start;
+   align-items: center;
+   padding-left: 10%;
     }
+
+    .likeBtn {
+        /* Default button styles */
+        background-color: var(--Green); /* Set default background color */
+        color: #000; /* Set default text color */
+    }
+    
+    .likeBtn.active {
+        /* Button styles when active (clicked) */
+        background-color: green; /* Set background color to green */
+        color: #e79595; /* Set text color to white */
+    }
+
+
 }

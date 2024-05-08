@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './viewprofile.css'; // Import CSS file
+import Sidebar from '../SideBarSection/sidebar';
 
 const Profile = () => {
   const decoded = JSON.parse(localStorage.getItem('auth'));
@@ -36,62 +37,67 @@ const Profile = () => {
   }
 
   return (
-    <div className="container">
-      <h1>User Profile</h1>
-
-      <div className="profile-pic-container">
-        <img className="profile-pic" src={base64String} alt="Profile Picture" />
+    <div className="vprofile_container">
+      <div className='side'>
+        <Sidebar/>
       </div>
+      <div className="profilecontainer">
+        <h1>User Profile</h1>
 
-      <div className="user-details">
-        <div className="detail">
-          <label>Name:</label>
-          <span>{username}</span>
+        <div className="profile-pic-container">
+          <img className="profile-pic" src={base64String} alt="Profile Picture" />
         </div>
-        <div className="detail">
-          <label>Age:</label>
-          <span>{age}</span>
-        </div>
-        <div className="detail">
-          <label>Gender:</label>
-          <span>{gender}</span>
-        </div>
-      </div>
 
-      <hr className="separator" />
-
-      <div className="interests">
-        <label>Interests:</label>
-        <ul>
-          {followed_activities && followed_activities.map((interest, index) => (
-            <li key={index}>{interest}</li>
-          ))}
-        </ul>
-      </div>
-
-      <hr className="separator" />
-
-      <div className="locations">
-        <label>Visited Places:</label>
-        <ul>
-          {followed_locations && followed_locations.map((location, index) => (
-            <li key={index}>{location}</li>
-          ))}
-        </ul>
-      </div>
-
-      <hr className="separator" />
-
-      <div className="posts-container">
-        {posts.map((postItem, index) => (
-          <div className="post" key={index}>
-            <div className="post-details">
-              <p className="post-description">{postItem.caption}</p>
-              <img className="post-image" src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
-              <p className="post-location">{postItem.location}</p>
-            </div>
+        <div className="user-details">
+          <div className="detail1">
+            <label>Name:</label>
+            <span>{username}</span>
           </div>
-        ))}
+          <div className="detail2">
+            <label>Age:</label>
+            <span>{age}</span>
+          </div>
+          <div className="detail3">
+            <label>Gender:</label>
+            <span>{gender}</span>
+          </div>
+        </div>
+
+        <hr className="separator" />
+
+        <div className="interests">
+          <label>Interests:</label>
+          <ul>
+            {followed_activities && followed_activities.map((interest, index) => (
+              <li key={index}>{interest}</li>
+            ))}
+          </ul>
+        </div>
+
+        <hr className="separator" />
+
+        <div className="locations">
+          <label>Visited Places:</label>
+          <ul>
+            {followed_locations && followed_locations.map((location, index) => (
+              <li key={index}>{location}</li>
+            ))}
+          </ul>
+        </div>
+
+        <hr className="separator" />
+
+        <div className="posts-container">
+          {posts.map((postItem, index) => (
+            <div className="post" key={index}>
+              <div className="post-details">
+                <p className="post-description">{postItem.caption}</p>
+                <img className="post-image" src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
+                <p className="post-location">{postItem.location}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
