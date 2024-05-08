@@ -12,6 +12,9 @@ router.post('/signup', signup);
 
 router.post('/login', signin);
 
+router.post('/delete', deleteUser);
+
+
 // handle Google authentication callback
 router.post('/google/callback', googleSignIn);
 router.post('/google/callback/signup', googleSignup);
@@ -23,7 +26,5 @@ router.get('/:id', profileInfo);
 router.get('/own/:id', ownProfileInfo);
 
 router.post('/update_location', updateLocation);
-
-router.post('/delete', deleteUser);
 
 export default router;
