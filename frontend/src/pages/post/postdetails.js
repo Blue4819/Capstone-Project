@@ -73,7 +73,7 @@ const PostDetails = () => {
   const handleLike = async () => {
     try {
       // Toggle like status of the post
-      const response = await axios.patch(`/post/like/${ID}`, decoded.token.user._id);
+      const response = await axios.patch(`/post/like/${ID}`, {uid: decoded.token.user._id});
       setPost(response.data);
       setIsLiked(!isLiked); // Update like status in the UI
     } catch (error) {
@@ -155,7 +155,7 @@ const PostDetails = () => {
             <div className="form-group">
               <label htmlFor="activity">Activity</label>
               <select className="form-control" id="activity">
-                <option value="">Select an activity</option>
+                <option value={post?.activity}>Select an activity</option>
                 {activities.map((activity, index) => (
                   <option key={index} value={activity}>
                     {activity}

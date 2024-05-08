@@ -89,7 +89,7 @@ const Top = () => {
     <div className="card mb-4" key={postItem._id}>
         <div className="box">
             <p className="card-username">
-                <a href={`/profile/${postItem.userId}`} className="username">{postItem.username}</a>
+                <a href={`/profile/${postItem.userId}`} className="username">{postItem.userId}</a>
             </p>
             <a href={`/post/${postItem._id}`}>
                 <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" className="image" />

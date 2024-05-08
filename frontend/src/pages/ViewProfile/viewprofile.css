@@ -40,11 +40,13 @@ body {
     display: flex;
     
 }
-
+.Main{
+    display:flex
+}
 .vprofile_container {
     display: flex;
     width: 90%;
-    height: 130vh;
+    height: 140vh;
     margin: 0 auto;
     padding: none;
     background-color: var(--PrimaryColor); /* Updated background color */

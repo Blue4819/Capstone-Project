@@ -13,7 +13,7 @@ const postSchema = new Schema({
   caption: String,
   picture: {data: String, contentType: String},
   userPicturePath: String,
-  likes: { type: Map, of: Boolean },
+  likes: { type: Map, of: Boolean, default: {}},
   comments: [{ type: String, default: [] }],
 }, { timestamps: true });
 

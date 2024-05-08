@@ -89,6 +89,7 @@ const Profile = () => {
 
         <div className="posts-container">
           {posts.map((postItem, index) => (
+            <a href={`/post/${postItem._id}`}>
             <div className="post" key={index}>
               <div className="post-details">
                 <p className="post-description">{postItem.caption}</p>
@@ -96,6 +97,7 @@ const Profile = () => {
                 <p className="post-location">{postItem.location}</p>
               </div>
             </div>
+            </a>
           ))}
         </div>
       </div>

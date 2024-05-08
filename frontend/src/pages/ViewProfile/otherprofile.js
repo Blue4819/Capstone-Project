@@ -55,9 +55,10 @@ export const OtherProfile = () => {
   }, [ID]);
 
   return (
-    <><div className='side'>
+    <div className='Main'>
+      <div className='side'>
       <Sidebar />
-    
+      </div>
     <div className="vprofile_container">
 
         <div className="profilecontainer">
@@ -106,7 +107,9 @@ export const OtherProfile = () => {
           <hr className="separator" />
 
           <div className="posts-container">
+          
             {posts.map((postItem, index) => (
+              <a href={`/post/${postItem._id}`}>
               <div className="card mb-4" key={index}>
                 <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" />
                 <div className="card-body">
@@ -115,10 +118,11 @@ export const OtherProfile = () => {
                   <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
                 </div>
               </div>
+              </a>
             ))}
           </div>
         </div></div>
-      </div></>
+      </div>
   );
 };
 
