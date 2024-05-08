@@ -17,10 +17,8 @@ const Top = () => {
     const locationId = location.state?.data;
     const ID = paramsId || locationId;
 
-    const fetchPosts = async () =>{
-        
+    const fetchPosts = async () =>{   
     };
-
     useEffect(() => {
         fetchUserData();
         //fetchPosts();
@@ -67,7 +65,7 @@ const Top = () => {
                             <center>
                                 {userData && (
                                     <>
-                                        <img src={base64String} alt="Image" />
+                                        <img src={base64String} alt="Image" className='profilePhoto'/>
                                         <div className='profileInfo'>
                                             <a href="/profile" className="username">{userData.username}</a>
                                             <p className='location'>{userData.location}</p>
@@ -88,10 +86,12 @@ const Top = () => {
                             <>
                                 <div className='posts-container'>
                                 {posts.map((postItem, index) => (
-                                    <div className="card mb-4" key={postItem._id}>
-                                    <p classname="card-username"><a href={`/profile/${postItem.userId}`}>{postItem.username}</a></p>
+                                    <div class="cardmb-4" className="box" key={postItem._id}>
+                                    <p classname="card-username">
+                                        <h2 href={`/profile/${postItem.userId}`}>{postItem.username}
+                                    </h2></p>
                                     <a href={`/post/${postItem._id}`}>
-                                    <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" className='profilephoto' />
+                                    <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image"  className='image'/>
                                     <div className="card-body">
                                     <h5 className="card-title">{postItem.caption}</h5>
                                     <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
@@ -106,14 +106,7 @@ const Top = () => {
                         {/* Border around post details */}
                         <div className="postBorder"></div>
 
-                        <div className='actions flex'>
-                        <button className='likeBtn'>
-                            <BiLike className='icon'/> <span>Like</span>
-                            </button>
-                            <button className='sendBtn'>
-                            <FiSend className='icon'/>  <span>Send</span>
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

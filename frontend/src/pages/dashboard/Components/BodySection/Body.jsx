@@ -8,9 +8,6 @@ const Body = () => {
         <div className='mainContent'>
             <Top />
             <div className='bottom flex'>
-                <button className='likeBtn' >
-                    <BiLike className='icon'/> <span></span>
-                    </button>
                 </div>
             </div>
     );

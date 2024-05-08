@@ -35,8 +35,9 @@ const Sidebar = () => {
     return (
         <div className='sideBar grid'>
             <div className='logoDiv flex'>
-                <img src={logo} alt="logo" />
-            </div>
+                <img src={logo} alt="logo" className="logoImage" />
+                </div>
+
 
             <div className="menuDiv">
                 <h2 className="divTitle">

@@ -25,16 +25,26 @@
     --smallFontSize: .813rem;
     --smallestFontSize: .75rem;
 }
-
+.side {
+    position: static;/* Fix the position of the sidebar */
+    top: 0; /* Position it at the top of the viewport */
+    left: 0; /* Position it at the left of the viewport */
+    height: 100vh; /* Set the height to 100% of the viewport height */
+    width: 30%; /* Set the width of the sidebar */
+    background-color: var(--PrimaryColor); /* Updated background color */
+    
+}
 body {
     font-family: 'Inter', sans-serif; /* Updated font */
     background-color: var(--bgColor); /* Updated background color */
+    display: flex;
+    
 }
 
 .vprofile_container {
     display: flex;
     width: 90%;
-    height: 60%;
+    height: 130vh;
     margin: 0 auto;
     padding: none;
     background-color: var(--PrimaryColor); /* Updated background color */
@@ -48,8 +58,10 @@ body {
 
 
 .profilecontainer {
-    width: 1200px;
-    height: 80%;
+    margin-left: 1px;/* Adjust margin to accommodate the fixed sidebar */
+    width: 95%; /* Adjust width to accommodate the remaining space */
+    padding: 2px; /* Add padding to the content area */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
 }
 
 h1 {
@@ -185,6 +197,8 @@ ul li {
 
 /* Grid layout for posts */
 .posts-container {
+    border-color: #626262;
+    border-radius: 20%;
     padding:5%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -199,6 +213,7 @@ ul li {
 
 .post-details {
     padding: 10px;
+    height: 400px;
 }
 
 .post-description {
@@ -207,7 +222,7 @@ ul li {
 
 .post-image {
     width: 100%;
-    height: auto;
+    height: 320px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -221,3 +236,4 @@ ul li {
     font-size: var(--h2FontSize);
     font-weight: 600; 
 }
+

@@ -73,7 +73,7 @@
 .sideBar .menuDiv .menulists .listitems::before {
   position: absolute;
   content: "";
-  height: 100%;
+  height: auto;
   left: 0;
   width: 5px;
   bottom: 0;
@@ -155,3 +155,9 @@
   top: -50px;
   left: -50px;
 }/*# sourceMappingURL=sidebar.css.map */
+
+.logoImage{
+  height: auto;
+}
+
+

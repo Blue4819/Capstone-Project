@@ -55,10 +55,10 @@
         }
 
         p {
+            
             font-family: Inter,sans-serif;
             font-size: var(--h3FontSize);
             padding: .5rem;
-            color: var(--greyText);
             font-weight: 500;
         }
 
@@ -137,12 +137,13 @@
 }
 
 .profilePhoto {
-    width: 100px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
-    border-radius: 50%; /* Make it round */
-    border: 2px solid #014b1b ; /* Add a border */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow */
+    width: 130px; /* Adjust width as needed */
+    height: 130px; /* Adjust height as needed */
+    border-radius: 60%; 
+    border: 3px solid #014b1b ; /* Add a border */
+    box-shadow: 10px rgba(184, 184, 184, 0.1); /* Add a shadow */
     cursor: pointer;
+    margin-right: 0%;
 }
 
 
@@ -204,9 +205,11 @@
 }
 
 .postDetails {
+    height: 100%;
     width: 100%; /* Take up full width inside the right card */
     padding: 1rem;
-    border: 1px solid var(--textColor); /* Border around post details */
+    border: 2px; /* Border around post details */
+
 }
 
 .actions {
@@ -220,3 +223,4 @@
     margin-top: 1rem; /* Add space between comment button and comments section */
     /* Other styles for comments section */
 }
+

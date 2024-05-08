@@ -52,7 +52,6 @@
   font-family: Inter, sans-serif;
   font-size: var(--h3FontSize);
   padding: 0.5rem;
-  color: var(--greyText);
   font-weight: 500;
 }
 .topSection .cardSection .btn {
@@ -85,8 +84,7 @@
 }
 
 .title p {
-  font-size: 1.25rem;
-  position:relative;
+  font-size: 1.5rem;
   color: var(--textColor);
   font-weight: 400;
   font-family: "Inter", sans-serif;
@@ -101,16 +99,13 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px var(--inputColor);
   background-color: var(--whiteColor);
-  width: 35%; /* Set the width to 100% */
 }
 
 .searchBar input {
   border: none;
   outline: none;
   background: none;
-  width: 100%; /* Ensure input takes up full width */
 }
-
 
 .icon {
   color: var(--blackColor);
@@ -131,14 +126,14 @@
 }
 
 .profilePhoto {
-  width: 100px; /* Adjust width as needed */
-  height: 100px; /* Adjust height as needed */
-  border-radius: 50%; /* Make it round */
-  border: 2px solid #014b1b; /* Add a border */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  width: 130px; /* Adjust width as needed */
+  height: 130px; /* Adjust height as needed */
+  border-radius: 60%;
+  border: 3px solid #014b1b; /* Add a border */
+  box-shadow: 10px rgba(184, 184, 184, 0.1); /* Add a shadow */
   cursor: pointer;
+  margin-right: 0%;
 }
-
 
 .username {
   font-family: Inter, sans-serif;
@@ -180,8 +175,9 @@
 }
 
 .rightCard {
-  width: 50%; /* Take up 40% of the space */
+  width: 100%; /* Take up 40% of the space */
   margin: auto; /* Center the card horizontally */
+  border-radius: 10%;
 }
 
 .mediaContent video {
@@ -189,29 +185,41 @@
   max-width: 100%; /* Ensure the video doesn't exceed its container */
   height: auto; /* Maintain aspect ratio */
 }
+.box{
+  border-radius: 10%;
+  height: 20%;
+
+}
+.postBorder{
+  border-radius: 10%;
+}
 
 .cardSection {
   display: flex;
   justify-content: flex-start; /* Align the card section to the left */
   align-items: flex-start; /* Align items to the top */
   padding: 1rem; /* Add padding to the card section */
+  border-radius: 10%;
 }
 
 .postDetails {
-  height: 500px;
-  width: 500px; /* Take up full width inside the right card */
-  padding: 1rem;
-  border-radius: 10px;
-  border: 1px solid var(--textColor); /* Border around post details */
+  height: 100%;
+  width: 100%; /* Take up full width inside the right card */
+  padding: 1rem; /* Border around post details */
 }
 
 .actions {
-  display: inline;
+  display: flex;
   align-items: center;
   gap: 1rem;
-   /* Add space between post details and actions */
+  margin-top: 1rem; /* Add space between post details and actions */
 }
 
-/* Add space between comment button and comments section */
+.commentsSection {
+  margin-top: 1rem; /* Add space between comment button and comments section */
   /* Other styles for comments section */
-/*# sourceMappingURL=top.css.map */
+}/*# sourceMappingURL=top.css.map */
+
+.image{
+  height: 300px;
+}
