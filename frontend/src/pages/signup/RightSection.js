@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CreateAccount from './createaccount.js';
 
-
 const RightSection = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -25,7 +24,7 @@ const RightSection = () => {
       setDob(e.target.value);
     } else if (e.target.name === 'location') {
       setLocation(e.target.value);
-   } else if (e.target.name === 'password') {
+    } else if (e.target.name === 'password') {
       setPassword(e.target.value);
     } else if (e.target.name === 'confirmPassword') {
       setConfirmPassword(e.target.value);
