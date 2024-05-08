@@ -118,7 +118,7 @@ const EditProfile = () => {
 
   return (
     <div className="container">
-      <Sidebar />
+      <Sidebar className='sides'/>
       <div className="profile-pic-container">
         <img id="profilePicPreview" className="profile-pic" src={picturePath.data || '#'} alt="Profile Picture Preview" />
         <label htmlFor="profilePic" className="upload-btn">Upload Profile Picture</label>

@@ -50,7 +50,7 @@ const Top = () => {
                             <center>
                                 {userData && (
                                     <>
-                                        <img src={`data:${dataType};base64,${base64String}`} alt="Image" />
+                                        <img src={`data:${dataType};base64,${base64String}`} alt="Image" className='profilePhoto'/>
                                         <div className='profileInfo'>
                                             <a href="/profile" className="username">{userData.username}</a>
                                             <p className='location'>{userData.location}</p>
@@ -75,33 +75,22 @@ const Top = () => {
                                 <div className='posts-container'>
                                     {posts.map((postItem, index) => (
                                         <div className="card mb-4" key={index}>
-                                            <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" className='profilephoto' />
+                                            <img src={`data:${dataType};base64,${base64String}`} alt="Image" className="profilePhoto" />
                                             <div className="card-body">
                                                 <h5 className="card-title">{postItem.caption}</h5>
                                                 <p className="card-text"><strong>Activity:</strong> {postItem.activity}</p>
                                                 <p className="card-text"><strong>Location:</strong> {postItem.location}</p>
-                                            </div>
+                                            </div> 
                                         </div>
                                     ))}
                                 </div>
                             </>
                         )}
-                        {/* Border around post details */}
-                        <div className="postBorder"></div>
-
-                        <div className='actions flex'>
-                            <button className='likeBtn'>
-                                <BiLike className='icon'/> <span></span>
-                            </button>
-                            <button className='sendBtn'>
-                                <FiSend className='icon'/> 
-                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+         
     );
 }
-
 export default Top;

@@ -131,11 +131,14 @@
 }
 
 .profilePhoto {
-  width: 80%; /* Adjust as needed */
-  height: 80%; /* Adjust as needed */
-  border-radius: 50%;
-  cursor: pointer; /* Add cursor pointer for clickable effect */
+  width: 100px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  border-radius: 50%; /* Make it round */
+  border: 2px solid #014b1b; /* Add a border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow */
+  cursor: pointer;
 }
+
 
 .username {
   font-family: Inter, sans-serif;
@@ -198,16 +201,17 @@
   height: 500px;
   width: 500px; /* Take up full width inside the right card */
   padding: 1rem;
-  border: 2px solid #ccc;
   border-radius: 10px;
-  overflow: hidden;/* Border around post details */
+  border: 1px solid var(--textColor); /* Border around post details */
 }
 
 .actions {
-  align-items: flex-end;
-  align-content: center;
+  display: inline;
+  align-items: center;
   gap: 1rem;
-  margin-top: 100%; /* Add space between post details and actions */
+   /* Add space between post details and actions */
 }
 
+/* Add space between comment button and comments section */
+  /* Other styles for comments section */
 /*# sourceMappingURL=top.css.map */
