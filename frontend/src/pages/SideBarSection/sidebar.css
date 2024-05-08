@@ -73,7 +73,7 @@
 .sideBar .menuDiv .menulists .listitems::before {
   position: absolute;
   content: "";
-  height: 100%;
+  height: auto;
   left: 0;
   width: 5px;
   bottom: 0;

@@ -54,6 +54,9 @@
   object-fit: cover;
 }
 
+.close{
+  
+}
 .card-body {
   border-radius: 10%;
   border:#bdbdbd;
