@@ -70,9 +70,15 @@
   margin-bottom: 1rem;
 }
 
-.buttonss{
+.buttonss {
   padding: 1% 1%;
+  display: flex; /* Add flex display to align buttons horizontally */
 }
+
+.buttonss button {
+  margin-right: 10px; /* Add margin to the right of each button */
+}
+
 .card-text strong {
   font-size: var(--h2FontSize);
   font-family:Inter, sans-serif;
