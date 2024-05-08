@@ -89,7 +89,7 @@ const Top = () => {
                                 <div className='posts-container'>
                                 {posts.map((postItem, index) => (
                                     <div className="card mb-4" key={postItem._id}>
-                                    <a href={`/profile/${postItem.userId}`}>{postItem.username}</a>
+                                    <p classname="card-username"><a href={`/profile/${postItem.userId}`}>{postItem.username}</a></p>
                                     <a href={`/post/${postItem._id}`}>
                                     <img src={`data:${postItem.picture.contentType};base64,${postItem.picture.data}`} alt="Post Image" className='profilephoto' />
                                     <div className="card-body">
