@@ -185,6 +185,8 @@ ul li {
 
 /* Grid layout for posts */
 .posts-container {
+    border-color: #626262;
+    border-radius: 20%;
     padding:5%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -207,7 +209,7 @@ ul li {
 
 .post-image {
     width: 100%;
-    height: auto;
+    height: 200px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }

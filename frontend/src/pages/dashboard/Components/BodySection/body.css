@@ -27,18 +27,16 @@
   overflow: auto;
 }
 .mainContent .bottom {
-  padding-left: 30%;
   align-items: center;
-
-  .likeBtn {
-    /* Default button styles */
-    background-color: var(--Green); /* Set default background color */
-    color: #000; /* Set default text color */
+  padding-left: 10%;
 }
-
-.likeBtn.active {
-    /* Button styles when active (clicked) */
-    background-color: green; /* Set background color to green */
-    color: #ee8383; /* Set text color to white */
+.mainContent .likeBtn {
+  /* Default button styles */
+  background-color: var(--Green); /* Set default background color */
+  color: #000; /* Set default text color */
 }
+.mainContent .likeBtn.active {
+  /* Button styles when active (clicked) */
+  background-color: green; /* Set background color to green */
+  color: #e79595; /* Set text color to white */
 }/*# sourceMappingURL=body.css.map */
